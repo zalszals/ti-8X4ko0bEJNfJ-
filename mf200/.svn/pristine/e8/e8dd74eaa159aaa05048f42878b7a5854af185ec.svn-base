@@ -1,0 +1,101 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+<style>
+
+	table{ width: 600px; padding: 3%; margin: 0 auto; font-family: "微软雅黑","宋体";  }
+	table tr{ margin: 3px 0px;display:block;  }
+	input{ width:300px; height: 32px; padding-left: 15px; line-height: 32px; font-size:14px; color:#780906; border: 1px solid #e8e8e8; border-radius: 3px;}
+	.dsadds{ background-color: #567676 ; display: block;  width: 200px; height: 40px; border-radius: 3px;color: #fff; line-height: 40px; text-align: center; margin-left:40px;  }
+	select{ width:300px; height: 36px; line-height: 36px; padding-left: 12px; }
+	.tdleft{ background-color: #555; width: 80px; color: #fff; font-weight:bold; font-size: 13px;  line-height: 36px; text-align:center; border-radius: 10px 0px 0px 10px;   }
+</style>
+ <table>
+<form class="layui-form" enctype="multipart/form-data" method="post" id="myform" >
+
+<tr><td ><div class="tdleft">编号</div></td><td style="text-align: left;"><input name="node_id" value="{$update.node_id}" readonly="readonly"/></td></tr>
+
+<tr><td><div class="tdleft">中文名称</div></td>
+	<td style="text-align: left;"><input name="title" value="{$update.title}" /></td>
+</tr>
+
+<tr><td><div class="tdleft">英文</div></td><td style="text-align: left;"><input name="name" value="{$update.name}" /></td></tr>
+<tr><td><div class="tdleft">排序</div></td><td style="text-align: left;"><input name="sort" value="{$update.sort}" /></td></tr>
+<tr><td><div class="tdleft">菜单</div></td>
+	<td>
+		<select style=" height:32px;color:#780906; border: 1px solid #e8e8e8; border-radius: 3px;">
+			
+			<option value="{$update.level}">{if condition="$update.level eq 1"}模块{elseif condition="$update.level eq 2"}控制器{elseif condition="$update.level eq 3"}方法{/if}</option>
+		
+		</select>
+	</td>
+</tr>
+
+
+
+<tr><td><div class="tdleft">状态</div></td><td style="text-align: left;"><input name="status" value="{$update.status}" /></td></tr>
+<tr><td><div class="tdleft">Api接口</div></td><td style="text-align: left;"><input name="is_api" value="{$update.is_api}" /></td></tr>
+
+<!--
+<tr><td><div class="tdleft">Api</div></td><td style="text-align: left;"><input name="is_api" value="{$update.is_api}" /></td></tr>
+-->
+
+<tr><td><div class="tdleft">作者</div></td><td style="text-align: left;"><input name="creat_author" value="{$update.creat_author}" /></td></tr>
+<!--
+<tr><td><div class="tdleft">时间</div></td><td style="text-align: left;"><input name="creat_time" value="{$update.creat_time}" /></td></tr>
+
+<tr><td><div class="tdleft">时间</div></td><td style="text-align: left;"><input name="creat_time" value="{$update.creat_time|date='Y-m-d',###}" /></td></tr>
+-->
+
+<tr><td><div class="tdleft">备注</div></td><td style="text-align: left;"><input name="remark" value="{$update.remark}" /></td></tr>
+
+
+ 
+<!--
+<tr><td><div class="tdleft">层级菜单</div></td>
+	<td>
+		<select>
+			{volist name="upd" id="list"}
+
+			<option value="{$list.node_id}">{$list.title}--{$list.name}</option>
+
+			{/volist}
+		</select>
+	</td>
+</tr>
+-->
+
+<tr><td><span class="dsadds" type="button" onClick="subEdit()">更新</span></td></tr>
+</form>
+</table>
+
+
+
+<script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script>
+function subEdit(){
+	var form=$("#myform").serialize();
+	$.ajax({
+		data:form,
+		type:"post",
+		url:"{:url('menu/menu/update_do')}",
+		success:function(msg){
+			if(msg.st==1){
+				layer.msg(msg.txt);
+			}else{
+				layer.msg(msg.txt);
+			}
+		}
+	})
+
+}
+</script>
+
+</body>
+</html><script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/static/layer/layer.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>

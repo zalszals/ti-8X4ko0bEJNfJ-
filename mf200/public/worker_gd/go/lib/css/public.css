@@ -1,0 +1,63 @@
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+	width:8px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+	border-radius:10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+	border-radius:10px;
+	background:#ccc;
+	-webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+}
+/* 滚动条滑块 失去焦点 */
+::-webkit-scrollbar-thumb:window-inactive {
+	background:#ccc;
+}
+
+body{background:#F3F9F9;min-width:1330px;}
+.header{
+	background: -webkit-linear-gradient(left, #297251 , #b1c778); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #297251, #b1c778); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #297251, #b1c778); /* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #297251 , #b1c778); /* 标准的语法 */
+	height:60px;min-width:1330px;
+}
+.fc-fff{color:#FFF;}
+.fc-1{color:#f1a655;}
+.fc-2{color:#ccc;}
+.fc-3{color:#333;}
+.fc-4{color:#666;}
+.fs18{font-size:18px;}
+
+#left-box{margin-right:400px;padding:30px 25px 10px 25px;}
+#right-box{background-color:#F9F9F9;}
+
+/* 公告右侧样式 开始 */
+#right-box{margin-right:-15px;}	
+.rightbgc{background-color:#FFF;border-radius:10px;color:#B2C97A;border:1px solid #eaeaea;box-shadow:1px 1px 50px #eaeaea;}	
+.gg_bottom{border-bottom:1px solid #ecedee;}
+.gg_on{border-bottom:1px solid #b0c777;}
+.gg_title{font-size:16px;line-height:44px;font-weight:600;color:#323232;}
+.gg_title_on{color:#b1c878;border-bottom:1px solid #b0c777;}
+.gg_line{height:5px;border-bottom:1px solid #ecedee;}
+.gg_info{padding:0 20px;font-size:12px;line-height:20px;}
+.event{width:320px;height:60px;border-left:3px solid #b0c779;margin-bottom:20px;background:#f8f9f1;}
+.event-box{height:140px;overflow-y:auto;overflow-x:auto;}
+/* 公告右侧样式 结束 */
+
+/* 日历样式开始 */
+.data-box{height:300px;color:#666;}
+.data-box dl{padding:6px 10px;}
+.data-box dd{float:left;margin:0 8px;width:29px;height:29px;text-align:center;line-height:29px;border-radius:50%;}
+.date_no{color:#000;}
+.current_date{background-color:#F2A148;color:#FFF;}
+.selected_date{border:1px solid #F2A148;}
+.date_mask{
+	background-color: #FFF;position:absolute;top:0;left:10px;width:305px;height:290px;
+	background-image: url('../img/public/loading.gif');background-repeat: no-repeat;background-position:center center;
+}
+/* 日历样式结束 */

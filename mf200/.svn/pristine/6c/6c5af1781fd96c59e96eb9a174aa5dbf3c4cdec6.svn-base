@@ -1,0 +1,6 @@
+<video width="800" height="600" controls>
+  <source src="mfarmers.mpeg" type="video/mpeg">  
+  <object data="mfarmers.mpeg" width="800" height="600">
+    <embed src="movie.swf" width="800" height="600">
+  </object>
+</video>

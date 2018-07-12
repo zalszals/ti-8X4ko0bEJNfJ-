@@ -1,0 +1,154 @@
+body,h1,h2,h3,h4,h5,h6,ul,li,ol,img,p,form,input{
+	margin: 0;
+	padding: 0;
+	font-family: '微软雅黑','Microsoft yahei','宋体',Tahoma,Verdana,Arial,sans-serif;
+	letter-spacing: 1px;
+}
+body{font-size: 14px;}
+textarea {resize:none;outline: none;}
+input{}
+ul ,ul li,ol{list-style:none;list-style-type: none;}
+.clear{zoom:1;}
+.clear:after{display:block;content:'.';clear:both;overflow:hidden;height:0;visibility:hidden;}
+.currentClear{clear:both;}
+.ove{overflow: hidden;text-overflow: ellipsis;}
+img{border:none;}
+a,a:focus,a:active,a:hover,a:link,a:visited{text-decoration:none;color:inherit;}
+.left{float:left; display:inline;}
+.right{float:right; display:inline;}
+.fl{float:left;}
+.fr{float:right;}
+.hidden{display:none;}
+.show{display:block;}
+/*按钮*/
+.gkbtn{border:1px solid #666;background:#fff;color:#000;border-radius:3px;padding:5px 20px;cursor:pointer;}
+.gkbtn:hover{background:#ccc;}
+.y_but{padding: 5px 10px;border: 1px solid #000;border-radius: 3px;cursor:pointer;line-height:14px;} 
+.y_but:hover{background:#ccc;}
+/*字体*/
+.tc{text-align:center;}
+.fon12{font-size:12px;}
+.f12{font-size:12px;line-height:24px;}
+.f12ne{font-size:12px;height:30px;line-height:30px;color:#B7B7B7;}
+.f14{font-size:14px;line-height:28px;}
+.fon14{font-size:14px;}
+.f16{font-size:16px;}
+.f18{font-size:18px;}
+
+/*间距*/
+.nomargin{margin:0 !important;}
+.mauto{margin:auto;}
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mt25{margin-top:25px;}
+.mt30{margin-top:30px;}
+.mt35{margin-top:35px;}
+.mt40{margin-top:40px;}
+.mt45{margin-top:45px;}
+.mb5{margin-bottom:5px;}
+.mb10{margin-bottom:10px;}
+.mb15{margin-bottom:15px;}
+.mb25{margin-bottom:25px;}
+.mb35{margin-bottom:35px;}
+.mb30{margin-bottom:30px;}
+.mb20{margin-bottom:20px;}
+.ml5{margin-left:5px;}
+.ml10{margin-left:10px;}
+.ml15{margin-left:15px;}
+.ml20{margin-left:20px;}
+.ml25{margin-left:25px;}
+.ml30{margin-left:30px;}
+.mr5{margin-right:5px;}
+.mr10{margin-right:10px;}
+.mr15{margin-right:15px;}
+.mr20{margin-right:20px;}
+.mr25{margin-right:25px;}
+.mr30{margin-right:30px;}
+/*宽度*/
+.w20{width:20px;}
+.w30{width:30px;}
+.w40{width:40px;}
+.w50{width:50px;}
+.w54{width:54px;}
+.w60{width:50px;}
+.w70{width:70px;}
+.w75{width: 75px;}
+.w150{width: 150px;}
+.w80{width:80px;}
+.w-100{width:100%;}
+.w1200{width:1200px;margin:0 auto;}
+/*高度*/
+.h20{height:20px;}
+.h30{height:30px;}
+.h40{height:40px;}
+.h50{height:50px;}
+.h60{height:50px;}
+.h70{height:70px;}
+.h80{height:80px;}
+.h-100{height:100%;}
+/*定位*/
+.relative{position:relative;}
+.absolute{position:absolute;}
+/*图片*/
+.vh{overflow:hidden;}
+/*头像40*/
+.user_face40{width:40px !important;height:40px !important;border-radius:5px;}
+/*头像20*/
+.user_face20{width:20px !important;height:20px !important;border-radius:3px;}
+
+.pl25{padding-left:25px;}
+.p240{padding:20px 40px;}
+.p0{padding:0;}
+.mag0{margin-left:0;margin-right:0;}
+.row20{padding:20px;background:#fff;}
+/*颜色*/
+.colorccc{color:#CCCCCC;}
+.colorcc9966{color:#cc9966;}
+/*背景色*/
+.whitebg{background:#fff;}
+.whitebg{background:#fff;}
+/*坎宫 文字颜色*/
+.namec{#color:#000;}
+.c99{color: #999;}
+.c66{color: #666;}
+.c33{color: #333;}
+.c96{color: #cc9966}
+/*个人中心按钮*/
+.btn_y1{width:120px;height:32px;line-height:32px;background:#C78C44;color:#FFF!important;font-size:14px;
+border-radius:4px;cursor: pointer;display:inline-block;text-align: center;}
+.btn_y1:hover{background:#C46217;}
+.btn_y2{width:120px;height:32px;line-height:30px;color:#C78C44;font-size:14px;
+border-radius:4px;cursor:pointer;border:1px solid #C46217;display:inline-block;text-align: center;}
+.btn_y3{width:120px;height:32px;line-height:32px;background:#CC9966;color:#FFF!important;font-size:14px;
+border-radius:4px;cursor: pointer;display:inline-block;text-align: center;}
+.btn_y3:hover{background:#C46217;}
+.bor0{border: none!important;}
+/*三角形——箭头*/
+.y-sjx{
+	display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 4px solid #666;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    margin-left: 3px;
+    margin-right: 3px;
+    position: relative;
+    top: -2px;
+  }
+	/*三角形——箭头*/
+  .y-sjx1{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 4px solid #636667;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    margin-left: 3px;
+    margin-right: 3px;
+    position: relative;
+    top: -2px;
+  }
+    /*三角形——箭头*/  

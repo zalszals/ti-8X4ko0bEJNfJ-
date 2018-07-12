@@ -1,0 +1,284 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/static/layer/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/static/layer/layer.js" type="text/javascript"></script>
+<body>
+<style>
+
+ .newmain { width: 90%; height:260px; padding:5%; margin: 0 auto; }
+ .newmaina{width: 90%; height:260px; padding:5%; margin: 0 auto; }
+    table
+    { width:100%;
+        border-collapse:collapse;
+    }
+
+    table td
+    { height: 40px;
+        border: 1px solid #e2e2e2;
+        text-align: center;
+    }
+
+    table  td a{
+        color: #555; text-decoration: none;}
+
+
+#jsddm{ width:100%; height:auto;}
+.list_li_a{ width:100%; float:left; display:inline; color:#333; background-color:#33CCFF; }
+
+
+.trth{ background-color:#F2F2F2;border: 1px solid #eee; font-size:14px; height:40px; line-height:40PX; font-weight:bold; color:#555; }
+.trth th{font-family: "微软雅黑","宋体"; }
+.trhover:hover{background-color:#888; color:#fff; font-size: 13px;}
+ .trhover{color:#666;  height: 40px;  font-size: 13px;
+ }
+ .trth:hover{ background-color:#888; color:#fff; }
+ select{
+     appearance:none;
+     -moz-appearance:none;
+     -webkit-appearance:none;
+     background: url("__STATIC__/images/arrow.png") no-repeat scroll right center transparent;
+     padding-right: 14px;
+
+ }
+
+ select::-ms-expand { display: none; }
+ select:hover{ border:2px solid #dedede;}
+ #class_c{ width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;}
+ #class_c:hover{  width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;  border:2px solid  #dedede;}
+
+.new_del_but { width: 64px; height: 30px; font-size: 13px; font-weight: bold;font-family: "微软雅黑","宋体";margin-bottom: 5px;
+    line-height:30px; text-indent:1em; color:#fff;float: left; display: inline;  border-radius: 3px; border: none;  background: url(/static/images/shanchu.png) 5px center no-repeat #ff6838;}
+.new_add_but{width: 64px; height: 30px; margin-left: 15px; font-size: 13px; font-weight: bold;font-family: "微软雅黑","宋体";margin-bottom: 5px;
+    line-height:30px; text-indent: 2em; color:#fff;float: left; display: inline;  border-radius: 3px; border: none;  background: url(/static/images/add.png) 5px center no-repeat #1aa094;}
+ .new_add_but a{ color:#fff; text-decoration: none;}
+    ul li{ list-style-type: none;}
+    .tda a{ text-decoration: none; color: #666; }
+    .tda a:visited{ text-decoration: none; color: #666; }
+    .tda a:hover{ text-decoration: none; color:#564563; }
+.pagination{ float:left; display:inline; width: auto; margin:12px 20px 0px 20px;
+ border-radius: 5px; text-align: center; }
+
+.newinput{ width: 320px; float: left; height: 30px; display: inline; margin-left:20px;  }
+.zcatesubcs{ width: 230px; height: 30px; line-height: 28px; padding:0px 5px 5px 15px; font-size:14px; color: #444; display: inline-block; }
+.zcatesubcs:hover{padding:0px 5px 5px 15px;font-size:14px;color: #444;}
+.zcatesubcs option{ width: 230px; }
+#dsds{ width: 68px; height: 28px; border-radius: 3px; border: none; background:rgba(0,134,250,0.9); text-align: center; display: inline-block; margin-left:0px; line-height: 28px; color: #fff;  font-size: 14px; font-weight: bold;font-family: "微软雅黑","宋体";}
+
+.pagination a{ width: auto; padding: 5px 15px; background:rgba(0,134,250,0.9); color:#fff; display: inline-block; text-decoration: none;  } 
+.active{ background:rgba(235,235,235,0.9);display: inline-block; color:#555;padding: 5px 15px;}
+</style>
+
+
+<!-- <form name="menu_list" action="{:url('menu/Menu/menu_del')}" method="post"> -->
+<form>
+    <div class="newmain">
+    <table>
+            <tr>
+			<span class="menu_top_do">
+                <!-- <input class="new_del_but" type="submit" value="删除" /> -->
+				<span class="new_del_but" onclick="del()">删除</span>
+				
+                <span class="new_add_but"><A href="{:url('menu/Menu/menu_add')}">添加</A></span>
+                <div class="newinput">
+                    <select id="zcatesub" class="zcatesubcs" onclick="get_moda()">
+                        {volist name="zcate" id="list"}
+                        <option value="{$list.node_id}">{$list.title}--{$list.name}</option>
+                        {/volist}
+                    </select>
+                    <a id="dsds">查看</a>
+                </div>
+            </span>
+            </tr>
+
+
+
+    <tr class="trth" >
+        <th><!-- <input name="menu_box" type="checkbox" value=""  id="CheckAll" type="button" /> --></th>
+
+
+        <th>编号</th>
+        <th>作者</th>
+        <th>中文名称</th>
+        <th>英文名称</th>
+        <th>等级</th>
+        <th>Api接口</th>
+        
+        <th>状态</th>
+        <th>时间</th>
+        <th>备注说明</th>
+        <th>所属部门</th>
+        <th>操作</th>
+
+
+    </tr>
+    {volist name="cate" id="vo"}
+
+    <tr class="trhover">
+
+        <td><input name="subBox[]" class="checkOne" type="checkbox" value="{$vo.node_id}" onclick="chooseThis(this)"/></td>
+       
+        <td>{$vo.node_id}</td>
+        <td>{$vo.creat_author}</td>
+        <td style="text-align: left; padding-left:60px;">{$vo.title}</td>
+        <td class="tda">
+            {if condition="$vo.level eq 3"}<A href="/index.php{$vo.record}" target="_blank"> {$vo.name}</A>{else /}{$vo.name}{/if}
+
+        </td>
+        
+        <td>{if condition="$vo.level eq 1"}模块{elseif condition="$vo.level eq 2"}控制器{elseif condition="$vo.level eq 3"}方法{/if}</td>
+
+        <td>{$vo.is_api}</td>
+        
+        <td>{$vo.status}</td>
+
+        <td><?php echo date("Y-m-d",$vo['creat_time']) ?></td>
+
+        <td style="overflow: scroll-y;">{$vo.remark}</td>
+
+        <td style="font-size: 12px;">
+        {if condition="$vo.group_id eq 1"}基础设置
+        {elseif condition="$vo.group_id eq 2"}生产管理
+        {elseif condition="$vo.group_id eq 5" }登录模块
+        {/if}
+        </td>
+        <td><a href="{:url('update')}?id={$vo.node_id}">编辑</a></td>
+
+    </tr>
+
+    {/volist}
+
+</table>
+
+
+      <ul class="pagination">共{$page}页&nbsp;&nbsp;共{$num}条&nbsp;&nbsp;</ul>{$pages}
+<div style="clear: both; height: 80px;"></div>
+</div>
+
+</form>
+
+
+</body>
+</html>
+
+<script src="/static/layer/layer.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script src="__STATIC__/js/jquery14.js" type="text/javascript"></script>
+
+<script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+<script>
+    function get_moda(){
+    var opt = $("#zcatesub").val();
+
+        $("#dsds").attr("href","{:url('menu/Menu/menu_option_select')}?id="+opt);
+
+
+}
+   
+    
+</script>
+
+
+<script type="text/javascript">
+$(function() {
+	$("#CheckAll").click(function() {
+		var flag = $(this).attr("checked");
+		$("[name=subBox[]]:checkbox").each(function() {
+			$(this).attr("checked", flag);
+		})
+	})
+})
+
+/**
+ * 删除方法
+ */
+function del(){
+	layer.msg('确定要删除吗', {
+		time: 0 ,//不自动关闭
+		btn: ['确定', '取消'],
+		yes: function(index){
+			var id;
+			$('.checkOne').each(function(){
+				if(this.checked == true){
+					id = this.value;
+				}
+			})
+			if(!id){
+				layer.msg('请勾选一条记录');
+				return;
+			}
+			$.ajax({
+				url:'/index.php/menu/Menu/menu_del',
+				data:{"node_id":id},
+				type:'post',
+				dataType:'json',
+				success:function(re){				
+					switch(re.status){
+						case -1:
+							layer.msg(re.msg);
+							break;
+						case 0 :							
+							layer.msg(re.msg);
+							break;
+						case 1 :						
+							layer.msg(re.msg,{time:1500},function(){
+								document.location.reload();
+							})	
+							break;
+						case 2 :						
+							layer.msg(re.msg, {
+								time: 0 ,//不自动关闭
+								btn: ['删除', '我再看看'],
+								yes: function(index){
+									doDelSon(re.node_id);//执行php删除
+								}
+							})
+							break;
+					}
+				}
+			})
+		}
+	})
+	
+}
+
+function doDelSon(m_id){
+
+	$.ajax({
+	
+		url:'/index.php/menu/Menu/menu_delson',
+		data:{"node_id":m_id},
+		type:'post',
+		dataType:'json',
+		success:function(re){
+			if(re.status==1){
+				layer.msg(re.msg,{time:1500},function(){
+					document.location.reload();
+				})
+			}else{
+				layer.msg(re.msg);
+			}
+		}
+	})
+}
+/**
+ * 选择自己
+ */
+function chooseThis(obj){	
+	$('.checkOne').each(function(){
+		if(obj !== this){
+			this.checked = false;
+		}
+	})
+}
+</script>
+
+
+
+
+

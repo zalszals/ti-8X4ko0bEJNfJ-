@@ -1,0 +1,20 @@
+<template>
+	<div id="d1">
+		<h2>请假申请单</h2>
+		<span>
+			<nav>申请人 ： 董事长</nav>
+			<nav>部门 ： 老板</nav>
+			<nav>日期 ： 2018-06-09</nav>
+		</span>
+		<p>请假类别 <select name="" id=""></select></p>
+		<p>请假原因 <input type="text"></p>
+		<p>请假时间</p>
+		<span>
+			<nav>开始时间<input type="text"></nav>
+			<nav>结束时间<input type="text"></nav>
+		</span>
+		<p>请假天数<input type="text"></p>
+		<p>审批人 <select name="" id=""></select></p>
+	</div>
+</template>
+

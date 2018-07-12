@@ -1,0 +1,163 @@
+html,body{}
+.act_ab{position: absolute;bottom: 50px;}
+.active{opacity: 1.0!important;background: #FF9B00!important;}
+.active2{border-left:3px solid  #38B2FF!important;opacity: 1.0!important;background: #fff!important;}
+.y_header{position: relative;}
+.y_head1{background: #263237;overflow: auto;overflow-x: hidden;position: relative;}
+.y_head1_logo{border-bottom: 1px solid #3F474A;width: 100%;
+	height: 70px;background: url(/Public/images/left_nav/logo.png) no-repeat 20% center;}
+.add_y_head1_logo{border-bottom: 1px solid #3F474A;width: 100%;
+	height: 70px;background: url(/Public/images/left_nav/logo1.png) no-repeat 48% center;}
+.nav_list{padding-bottom: 15px;border-bottom: 1px solid #3F474A;}
+.nav_list li{height: 40px;line-height: 40px;font-size:14px;color: #FFFFFF;opacity: 0.8;}
+.nav_list li a{display: block;height: 100%;width: 250px;padding-left: 17px;padding-right: 17px;}
+.nav_list li:hover{background: #3B3B3B;/*opacity: 1.0;*/}
+.nav_list li img{position: relative;top: -2px;}
+.y_head1_nav{opacity: 0.8!important;padding-left: 20px;color: #747474!important;}
+.y_head1_nav:hover{background: #263237!important;}
+.yuan1{border-radius:15px;height: 15px;color: #fff;background: #FF6B44;padding-left: 5px;padding-right: 5px;
+	font-size: 12px;display: inline-block;line-height: 15px;text-align: center;margin-left: 10px;}
+.y_guan{margin-top: 60px;margin-left: -15px;}
+.y_guan_img1{position: relative;top: 5px!important;left: 5px;}
+.y_guan_img{height: 23px;width: 23px;border-radius: 50%;margin-right: 0!important;margin-left: -10px;top: 9px!important;
+    margin-left: 8px!important;}
+.y_head2{background: #EEF3F0;width: 120px;position: absolute;left:-300px;overflow: auto;overflow-x: hidden;} 
+.y_head2_title{opacity: 0.4;padding:13px 30px;border-bottom:1px solid #999;padding-left: 17px;}
+.y_head2_title div{width: 85px;text-align: center;}
+.nav3_list li{height: 40px;line-height: 40px;text-align:left;opacity: 0.6;display: block;
+	box-sizing:border-box;padding-left: 14px;border-left:3px solid #EEF3F0;}
+.nav3_list li a{display: block;height: 100%;}
+.nav3_list li:hover{opacity: 1.0;background: #F5F8FA;border-left:3px solid #fff;}
+.y_nav_title{display: inline-block;width: 82px;}
+.y_tab{height: 30px;width: 144px;text-align: center;line-height: 30px;
+    background: url(/Public/images/left_nav/icon1.png) no-repeat 50% center;
+    background-size: 12px!important;
+    border-bottom: 1px solid #585B5C;opacity: 0.6;cursor: pointer;
+}
+.y_tab:hover{opacity: 1.0; border-bottom: 1px solid #3F474A;}
+.add_y_tab{height: 30px;width: 50px;text-align: center;line-height: 30px;
+    background: url(/Public/images/left_nav/icon2.png) no-repeat 44% center;
+    background-size: 12px!important;
+    border-bottom: 1px solid #666;opacity: 0.8;cursor: pointer;
+}
+.add_y_tab:hover{opacity: 1.0; border-bottom: 1px solid #585B5C;}
+.y_lookk_but{height: 32px;width: 16px; border-radius:5px 0 0 5px;
+	background: url(/Public/images/left_nav/ico_a1.png) no-repeat 50% center;
+  position: absolute;right:-1px;top:60%;cursor: pointer;z-index: 999;background-size:13px!important}
+.y_lookk_but:hover{height: 32px;width: 16px; border-radius:5px 0 0 5px;
+	background:url(/Public/images/left_nav/ico_a2.png) no-repeat 50% center;
+  position: absolute;right:-1px;top:60%;cursor: pointer;z-index: 999;background-size:13px!important}
+.y_show_but{height: 32px;width: 16px; border-radius:0px 5px 5px 0px;
+	background:#F2F2F2 url(/Public/images/left_nav/ico_b1.png) no-repeat 50% center;
+  position: absolute;right:-16px;top:60%;cursor: pointer;z-index: 999;}
+.y_show_but:hover{height: 32px;width: 16px; border-radius:0px 5px 5px 0px;
+	background:#F2F2F2 url(/Public/images/left_nav/ico_b2.png) no-repeat 50% center;
+  position: absolute;right:-16px;top:60%;cursor: pointer;z-index: 999}
+.y_right_box{position: fixed;top: 0;bottom: 0;position: relative;}
+.y_nav11{position: relative;}
+.y_nav11 a img:first-child{width: 21px!important;}
+#y_guanli{position: relative;left: 7px;}
+ /*
+ 气泡提示框
+ */
+.aliyun-console-sidebar-tooltip.right {
+		padding: 0 5px;
+		margin-left: 3px;
+	}
+	.aliyun-console-sidebar-tooltip.in {
+		opacity: 0.9;
+		filter: alpha(opacity=90);
+	}
+	.fade.in {
+		opacity: 1;
+	}
+	.aliyun-console-sidebar-tooltip {
+		position: absolute;
+		z-index: 1030;
+		display: block;
+		font-size: 12px;
+		line-height: 1.4;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		visibility: visible;
+	}
+	.aliyun-console-sidebar-tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-right-color: #425160;
+    border-width: 5px 5px 5px 0;
+}
+.aliyun-console-sidebar-tooltip .tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.aliyun-console-sidebar-tooltip .tooltip-inner {
+    min-width: 80px;
+    padding: 10px 8px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    border-radius:3px;
+    background-color: #425160;
+}
+.tooltip-inner {
+    max-width: 400px;
+    padding: 3px 8px;
+}
+.tooltip-inner {
+    min-width: 80px;
+    padding: 3px 8px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    border-radius: 4px;
+}
+.y_head1::-webkit-scrollbar-track
+     {
+         background-color: #F5F5F5;
+         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.22);
+     }
+     /*定义滚动条高宽及背景*/
+     .y_head1::-webkit-scrollbar
+     {   
+
+         width: 0px;
+         background-color: rgba(0, 0, 0, 0.34);
+     }
+     /*定义滚动条*/
+     .y_head1::-webkit-scrollbar-thumb
+     {
+         background-color: #8b8b8b;
+         border-radius: 10px;
+     }
+     
+     .y_head2::-webkit-scrollbar-track
+     {
+         background-color: #F5F5F5;
+         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.22);
+     }
+     /*定义滚动条高宽及背景*/
+     .y_head2::-webkit-scrollbar
+     {   
+
+         width: 0px;
+         background-color: rgba(0, 0, 0, 0.34);
+     }
+     /*定义滚动条*/
+     .y_head2::-webkit-scrollbar-thumb
+     {
+         background-color: #8b8b8b;
+         border-radius: 10px;
+     }

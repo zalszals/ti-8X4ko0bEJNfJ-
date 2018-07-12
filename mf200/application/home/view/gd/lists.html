@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>按工序发布工单</title>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	  	 <link rel="stylesheet" href="__STATIC__/css/layui.css" media="all">
+	    <script src="__STATIC__/jquery.min.js" type="text/javascript"></script>
+	    <script src="__STATIC__/layui.js" type="text/javascript"></script>
+	    <style type="text/css">
+			html{overflow-x:hidden;margin:0 auto; padding:0 auto;text-align:center;}
+			body {font-family:"SimHei";/*font-size:16px;*/overflow-x:hidden;}
+			.loginbox {max-width:800px;width:100%;padding:10px 0px 20px;}
+			.layui-input-block {margin-left:40px;}
+			.layui-btn {display:block;width:100%;border-radius:15px;}
+			.layui-btn:hover, .layui-btn:active, .layui-btn:focus {color:#434343;}
+			.layui-btn + .layui-btn {margin-left:0;margin-top:15px;}
+			.mybtn {background-color:#fed857;color:#434343;}
+			.layui-input, .layui-select, .layui-textarea {border:none;}
+			body .confirm-class .layui-layer-btn .layui-layer-btn0{text-align:center; border-radius:18px;background:#fe5f57;font-color:white;font-size:12px;padding:1px 25px;border:0px solid #fe5f57;margin-right:25px;margin-bottom:3px;}
+			body .confirm-class .layui-layer-btn .layui-layer-btn1{text-align:center; border-radius:18px;padding:1px 25px;margin-bottom:3px;font-size:12px;}
+			body .confirm-class{border-radius:5px;}
+			div .layui-unselect.layui-form-select{display:inline-block;margin-left:18px;border: 1px solid gray;line-height:38px;border-radius:2px;vertical-align:top;width:192px;}
+			div .layui-span-name{
+				display:inline-block;
+				width:75px;
+				height:38px;
+				line-height:38px;
+				border: 1px solid gray;
+				text-align:center;
+				border-radius:5px;
+				vertical-align:top;
+			}
+			.layui-form-item{
+				margin-top:20px;
+			}
+			.layui-form-item1{
+				margin-top:40px;
+			}
+			.layui-form-btn{
+				text-align:center; 
+				border-radius:5px;
+				background:#169BD5;
+				color:white;
+				font-size:16px;
+				width:260px;
+				line-height:38px;
+				border:0px solid #fe5f57;
+				cursor:pointer;
+				margin:0 auto;
+			}
+			#taskdiv{
+				display:none;
+				border:1px solid gray;
+				border-radius:5px;
+				width:290px;
+				height:150px;
+				margin:0 auto;
+				text-align:left;
+			}
+			#taskdiv div{
+				position:relative;
+				top:10px;
+				left:5px;
+				height:22px;
+				line-height:22px;
+			}
+			.le{
+				position:absolute;
+				left:120px;
+			}
+
+			#hang,#p{
+				position:absolute;
+				left:175px;
+			}
+
+			#skill,#unit,#datediv,#time,#days,#worker{
+				display:none;
+			}
+			.lay-span-name{
+				display:inline-block;
+				width:84px;
+				height:38px;
+				line-height:38px;
+				border: 1px solid gray;
+				margin-left:20px;
+				vertical-align:top;
+				border-radius:2px;
+				text-align:center;
+			}
+			.lay-span{
+				display:inline-block;
+				width:85px;
+				height:38px;
+				line-height:38px;
+				border: 1px solid gray;
+				vertical-align:top;
+				border-radius:2px;
+			}
+			.lay-span1{
+				display:inline-block;
+				width:12px;
+				height:38px;
+				line-height:38px;
+				vertical-align:top;
+			}
+			.lay-span-name:empty::before{  
+	            color:#757575;  
+	            content:attr(placeholder);  
+	        } 
+	        #date:empty::before{  
+	            color:#757575;  
+	            content:attr(placeholder);  
+	        }
+	        #s_date:empty::before{  
+	            color:#757575;  
+	            content:attr(placeholder);  
+	        } 
+	        #e_date:empty::before{  
+	            color:#757575;  
+	            content:attr(placeholder);  
+	        }  
+	        #date{
+	        	width:192px;
+				height:38px;
+	        }
+			#date,#s_date,#e_date{
+				text-align:center;
+			}
+			#unit .layui-unselect.layui-form-select{
+				width:82px;
+			}
+			#worker .layui-unselect.layui-form-select{
+				display:inline-block;
+				width:130px;
+				border-radius:3px;
+				margin-left:0px;
+			}
+			#day{
+				width:150px;
+				height:38px;
+				border:0px;
+				display:inline-block;
+			}
+			.layui-icon-add {
+				color:#989898;
+				position:absolute;
+				top:5px;
+				left:0px;
+				width:28px;
+				height:28px;
+				background:url(__STATIC__/images/add.png) no-repeat center;
+				background-size:100%;
+				cursor:pointer;
+			}
+			.layui-icon-del {
+				color:#989898;
+				position:absolute;
+				top:5px;
+				left:0px;
+				width:28px;
+				height:28px;
+				background:url(__STATIC__/images/del.png) no-repeat center;
+				background-size:100%;
+				cursor:pointer;
+			}
+			.icon{
+				display:inline-block;
+				position:relative;
+				top:0px;
+				left:20px;
+				width:50px;
+				height:38px;
+			}
+			input{
+				width:84px;
+				height:38px;
+				line-height:38px;
+				border:0px;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="loginbox">
+			<form class="layui-form" id="loginbox">
+				{if condition="$code eq 1"}
+					<div class="layui-form-item" id="plan">
+						<div class="layui-span-name">生产计划</div>
+					    <select name="planlist" lay-filter="plan">
+					    	<option>请选择生产计划</option>
+					    	{volist name="planlist" id="item"}
+						    <option value="{$item.plan_id}">{$item.plan_name}</option>
+						    {/volist}
+					    </select>
+				  	</div>
+				  	<div class="layui-form-item" id="task">
+						<div class="layui-span-name">种植任务</div>
+					    <select name="tasklist" lay-filter="task">
+					    	<option>请选择种植任务</option>
+					    </select>
+				  	</div>
+			 	{else/}
+				  	<div class="layui-form-item">
+						<div class="layui-span-name">种植任务</div>
+					    <select name="tasklist" lay-filter="task">
+					    	<option>请选择种植任务</option>
+					    	{volist name="tasklist" id="item"}
+						    <option value="{$item.t_id}">{$item.t_name}</option>
+						    {/volist}
+					    </select>
+				  	</div>
+				{/if}
+			  	<div class="layui-form-item" id="area">
+					<div class="layui-span-name">种植区域</div>
+				    <select name="arealist" lay-filter="area">
+				    	<option>请选择种植区域</option>
+				    </select>
+			  	</div>
+			  	<div id="taskdiv" class="layui-form-item">
+			  		<div>负&ensp;责&ensp;人：<span id="w"></span></div>
+			  		<div>作&emsp;&emsp;物：<span id="z"></span> <span class="le">品&emsp;种：</span><span id="p"></span></div>
+			  		<div>株&emsp;&emsp;距：<span id="zhu"></span> <span class="le">行&emsp;距：</span><span id="hang"></span></div>
+			  		<div>种植模式：<span id="m"></span></div>
+			  		<div>定植数量：<span id="l"></span></div>
+			  		<div>定植时间：<span id="j"></span></div>
+			  	</div>
+			  	<div class="layui-form-item" id="skill">
+					<div class="layui-span-name">工序</div>
+				    <select name="skilllist" lay-filter="skill">
+				    	<option>请选择工序</option>
+				    	{volist name="skill" id="item"}
+				    	<option value="{$item.skill_id}">{$item.skill_name}</option>
+						{/volist}
+				    </select>
+			  	</div>
+			  	<div class="layui-form-item" id="unit">
+					<div class="layui-span-name">工作量</div>
+					<div class="lay-span-name">
+						<input type="number"  placeholder="工作量" onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value.length>8)value=value.slice(0,8)">
+					</div>	
+				    <select name="unitlist" lay-filter="unit">
+				    	<option>单位</option>
+				    </select>
+			  	</div>
+			  	<div class="layui-form-item" id="datediv">
+					<div class="layui-span-name">工作日期</div>
+				    <div class="layui-unselect layui-form-select">
+				    	<div id="date" placeholder="请选择工作日期"></div>
+				    </div>
+			  	</div>
+			  	<div class="layui-form-item" id="time">
+					<div class="layui-span-name">工作时间</div>
+				    <div class="lay-span-name">
+				    	<div id="s_date" placeholder="开始时间"></div>
+				    </div>
+				    <div class="lay-span1"><hr style="height:1px;border: none;border-top:1px solid #000;margin-top:16px;"></div>
+				    <div class="lay-span">
+				    	<div id="e_date"  placeholder="结束时间"></div>
+				    </div>
+			  	</div>
+			  	<div class="layui-form-item" id="days">
+					<div class="layui-span-name">持续天数</div>
+				    <div class="layui-unselect layui-form-select" style="cursor:text;">
+				    	<input type="number" id="day" class="layui-input" placeholder="持续天数" onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value.length>8)value=value.slice(0,8)">
+				    	<div style="display:inline-block;vertical-align:top;">天</div>
+				    </div>
+			  	</div>
+			  	<div id="worker">
+				  	<div class="layui-form-item">
+					    <select name="workerlist" lay-filter="worker">
+					    	<option>请选择工人</option>
+					    	{volist name="worker" id="item"}
+					    	<option value="{$item.worker_id}">{$item.worker_name}</option>
+							{/volist}
+					    </select><div class="lay-span-name"><input type="number" placeholder="工作量" onkeyup="value=value.replace(/[^\d]/g,'')" oninput="if(value.length>8)value=value.slice(0,8)"></div><div class="icon"><i class="layui-icon-add" onclick="add()"></i></div>
+				  	</div>
+				</div>
+			  	<div class="layui-form-item1">
+			  		<div class="layui-form-btn" onclick="preview()">预览</div>
+			  	</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+
+			layui.use('form', function() {
+				
+				var form = layui.form;
+				
+				form.on('select(plan)', function(data) {
+					
+					var plan_id	= data.value;
+
+					console.log("$token");
+
+					$('#task select').empty();
+					
+					$.post("/home/Gd/ajaxTask?phone={$phone}&&token={$token}", {plan_id: plan_id}, function(res) {
+						
+						var data	= res.data;
+
+
+						var lis	= "<option>请选择种植任务</option>";
+
+						//var lis1 = "<dd lay-value='请选择种植任务' class='layui-this'>请选择种植任务</dd>";
+
+						$('#task select').append(lis);
+						//$('#task dl').append(lis1);
+
+						for(var i = 0; i < data.length; i++) {
+
+							lis	=  "<option value='"+data[i].t_id+"'>"+data[i].t_name+"</option>";
+
+							//lis1 = "<dd lay-value='"+data[i].t_id+"'>"+data[i].t_name+"</dd>";
+
+							$('#task select').append(lis);
+
+							//$('#task dl').append(lis1);
+							form.render();
+						}
+					})
+				})
+
+				form.on('select(task)', function(data) {
+
+					var task_id	= data.value;
+
+					$('#area select').empty();
+
+
+					$.post("/home/Gd/ajaxArea?phone={$phone}&&token={$token}", {task_id: task_id}, function(res) {
+						
+						var data = res.data;
+
+						$('#w').text(data['area_list'].worker_name);
+						$('#z').text(data['area_list'].p_cat_name);
+						$('#p').text(data['area_list'].cat_name+'  '+data['area_list'].cat_no);
+						$('#hang').text(data['area_list'].hang_ju);
+						$('#zhu').text(data['area_list'].zhu_ju);
+						$('#m').text(data['area_list'].mode_name);
+						$('#j').text(data['area_list'].grow_date);
+
+						var lis	= "<option>请选择种植区域</option>";
+
+						$('#area select').append(lis);
+
+						for(var i = 0; i < data['area'].length; i++) {
+
+							lis	=  "<option value='"+data['area'][i].area_id+"'>"+data['area'][i].area_name+"</option>";
+
+							$('#area select').append(lis);
+
+							form.render();
+						}
+					})
+
+				})
+
+				form.on('select(area)', function(data) {
+
+					if(data.value != '请选择种植区域'){
+						var area_id	= data.value;
+						var task_id = $("select[name='tasklist']").val();
+
+						$.post("/home/Gd/ajaxNum?phone={$phone}&&token={$token}", {area_id: area_id,task_id: task_id}, function(res) {
+							
+							var data = res.data;
+
+							$('#l').text(data);
+
+							$('#taskdiv').css('display','block');
+							$('#skill').css('display','block');
+
+							form.render();
+							
+						})
+					}
+
+				})
+
+				form.on('select(skill)', function(data) {
+
+					var skill_id	= data.value;
+
+					$('#unit select').empty();
+
+					$.post("/home/Gd/ajaxUnit?phone={$phone}&&token={$token}", {skill_id: skill_id}, function(res) {
+						
+						var data = res.data;
+
+						var lis	= "<option>单位</option>";
+
+						$('#unit select').append(lis);
+
+						for(var i = 0; i < data.length; i++) {
+
+							lis	=  "<option>"+data[i]+"</option>";
+
+							$('#unit select').append(lis);
+
+							form.render();
+						}
+						
+					})
+					$('#unit').css('display','block');
+					$('#datediv').css('display','block');
+					$('#days').css('display','block');
+					$('#time').css('display','block');
+					$('#worker').css('display','block');
+				})
+			})
+
+			layui.use('laydate', function(){
+
+			  	var laydate = layui.laydate;
+
+			  	laydate.render({
+
+			    elem: '#date',
+			    theme: 'molv'
+
+			  	})
+
+			  	laydate.render({
+
+				    elem: '#s_date',
+				    type: 'time'
+
+			  	})
+
+			  	laydate.render({
+
+				    elem: '#e_date',
+				    type: 'time',
+
+			  	})
+
+			})
+
+			function add(){
+
+				var lis = '';
+
+				lis = "<div class='layui-form-item'><select name='workerlist' lay-filter='worker'><option>请选择工人</option>{volist name='worker' id='item'}<option value='{$item.worker_id}'>{$item.worker_name}</option>{/volist}</select><div class='lay-span-name'><input type='number' placeholder='工作量' onkeyup='ChangeVal(this)' oninput='if(value.length>8)value=value.slice(0,8)'></div><div class='icon'><i class='layui-icon-del' onclick='del(this)'></i></div></div>";
+
+			    $('#worker').append(lis);
+
+			    layui.use('form', function() {
+				
+					var form = layui.form;
+
+				   	form.render();
+				 })
+
+			}
+			function ChangeVal(obj){
+
+
+				obj.value = obj.value.replace(/[^\d]/g,'');
+			}
+
+			function del(obj){
+
+				obj.parentNode.parentNode.remove();
+
+			    layui.use('form', function() {
+				
+					var form = layui.form;
+
+				   	form.render();
+				 })
+
+			}
+
+			function preview(){
+
+				var sendData = {};
+
+				sendData.t_id =  $("select[name='tasklist']").val();
+				sendData.area_id =  $("select[name='arealist']").val();
+				sendData.skill_id =  $("select[name='skilllist']").val();
+				sendData.worknum=  $("#unit div[class='lay-span-name'] input").val();
+				sendData.unit_name =  $("select[name='unitlist']").find("option:selected").text();
+				sendData.date =  $("#date").text();
+				sendData.s_time =  $("#s_date").text();
+				sendData.e_time =  $("#e_date").text();
+				sendData.day =  $("#day").val();
+				var length = $("select[name='workerlist']").length;
+				sendData.worker_id = '';
+				sendData.num = '';
+				var number = 0;
+				for(var i = 0; i < length; i++) {
+					if(!isNaN($("select[name='workerlist']").eq(i).val())){
+						sendData.worker_id = sendData.worker_id+','+$("select[name='workerlist']").eq(i).val();
+						sendData.num = sendData.num+','+$("#worker div[class='lay-span-name'] input").eq(i).val();
+						number = Number(number)+ Number($("#worker div[class='lay-span-name'] input").eq(i).val());
+					}
+				}
+				sendData.worker_id = sendData.worker_id.substring(1);
+				sendData.num = sendData.num.substring(1);
+				if($('#plan').length > 0){
+					if($("#plan select[name='planlist']").val() == '请选择生产计划' || !$("#plan select[name='planlist']").val()){
+						layui.use('layer', function(){
+							var layer = layui.layer;
+							layer.msg("请选择生产计划");
+						})
+						return;
+					}
+				}
+
+				if(isNaN(sendData.t_id) || !sendData.t_id){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择种植任务");
+					})
+					return;
+				}
+				if(isNaN(sendData.area_id || !sendData.area_id)){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择种植区域");
+					})
+					return;
+				}
+				if(isNaN(sendData.skill_id) || !sendData.skill_id){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择工序");
+					})
+					return;
+				}
+				if(!sendData.worknum){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请输入工作量");
+					})
+					return;
+				}
+
+				if(sendData.unit_name == '单位' || !sendData.unit_name){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择单位");
+					})
+					return;
+				}
+				if(!sendData.date){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择工作日期");
+					})
+					return;
+				}
+				if(!sendData.s_time){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择开始时间");
+					})
+					return;
+				}
+				if(!sendData.s_time){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择结束时间");
+					})
+					return;
+				}
+				if(!sendData.e_time){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择结束时间");
+					})
+					return;
+				}
+				if(!sendData.day){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择持续时间");
+					})
+					return;
+				}				
+				if(!sendData.worker_id){
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("请选择工人");
+					})
+					return;
+				}
+
+				if(number > sendData.worknum){
+
+					layui.use('layer', function(){
+						var layer = layui.layer;
+						layer.msg("工作量相加不能大于总工作量");
+					})
+					return;
+					
+				}
+
+				console.log(number);
+
+				$.ajax({
+
+					url: "/home/Gd/add?phone={$phone}&&token={$token}",
+
+					type: 'post',
+
+					data: sendData,
+
+					dataType: 'json',
+
+					success:function(re){
+
+
+						var data = JSON.stringify(re.data);
+
+						localStorage.setItem('data',data); 
+
+						window.location.href = "/home/Gd/preview?phone={$phone}&&token={$token}";
+
+					}
+
+				})
+
+			}
+		</script>
+	</body>
+</html>

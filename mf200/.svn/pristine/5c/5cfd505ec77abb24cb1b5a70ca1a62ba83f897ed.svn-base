@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+ 
+    
+</head>
+
+<frameset cols="190,*">
+
+    <frame src="/index.php/menu/menu/menu_nav_left" frameborder="no" border="0" framespacing="0" />
+
+    <frameset rows="0,*" cols="*" frameborder="no" border="0" framespacing="0">
+
+        
+
+        <frame src="/index.php/menu/menu/menu_add"  name="menu_1" scrolling="auto" noresize="noresize"  />
+        <frame src="/index.php/menu/menu/menu_list"  name="mainFrame" scrolling="auto" id="menu_2" noresize="noresize"  />
+
+    </frameset>
+
+</frameset>
+
+
+
+</html>

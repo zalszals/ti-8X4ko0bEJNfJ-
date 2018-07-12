@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>编辑职务</title>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	    <link rel="stylesheet" href="__STATIC__/css/layui.css" media="all">
+	    <script src="__STATIC__/jquery.min.js" type="text/javascript"></script>
+	    <script src="__STATIC__/layui.js" type="text/javascript"></script>
+	    <style type="text/css">
+			body {font-family:"SimHei";}
+			.loginbox {max-width:800px;margin:auto;padding:10px 15px 20px;}
+			.layui-form-label {padding:9px 0;width:40px;text-align:left;}
+			.layui-input-block {margin-left:40px;}
+			.layui-btn {display:block;width:100%;border-radius:15px;}
+			.layui-btn:hover, .layui-btn:active, .layui-btn:focus {color:#434343;}
+			.layui-btn + .layui-btn {margin-left:0;margin-top:15px;}
+			.mybtn {background-color:#fed857;color:#434343;}
+			header {text-align:center;color:#333;line-height:36px;height:50;padding:0 20px;}
+			.left{float:left;}
+			.right{float:right;}
+		</style>
+	</head>
+	<body>
+		<header>			
+			<!--p class="right">返回</p-->
+		</header>
+		<div class="loginbox">
+			<form class="layui-form" id="loginbox">
+				<div class="layui-form-item">
+				    <label class="layui-form-label">部门</label>
+				    <div class="layui-input-block">
+				    	<select name="grouplists" lay-filter="group" disabled="disabled">
+					        <option value="">请选择部门</option>
+					        {volist name="roles" id="item"}
+					        <option value="{$item.group_id}" {if condition="$item.group_id eq $role.group_id"} selected {/if}>{$item.group_name}</option>
+					        {/volist}
+				      	</select>
+				    </div>
+			  	</div>
+			  <div class="layui-form-item">
+				  <label class="layui-form-label">职务</label>
+				  <div class="layui-input-block">
+			      	  <input name="role_name" lay-verify="role_name" autocomplete="off" value="{$role.role_name}" class="layui-input" type="text">
+				  </div>
+			  </div>
+			  <div class="layui-form-item" pane="">
+			    <label class="layui-form-label">权限</label>
+			    <div class="layui-input-block" style="line-height:36px;">
+			    	<span style="font-size:12px;color:#b5b5b5;">请勾选该职务需要添加的权限</span>
+			    </div>
+			  </div>
+			  <div id="menu-area">
+				<span id="GuanPower">管理权限</span><hr style="height:1px;border:none;border-top:1px solid #555555;" />
+			  	  {php} $arr	 = explode(',', $role['node_str']); {/php}
+			  	  {volist name="menus" id="item"}
+				  
+					{php}
+						if($item['job_status']=='2' || $item['job_status']=='3') continue;
+					{/php}
+				  <span>
+			  	  <div class="layui-form-item main_box" pane="">
+				  	  <div class="">
+				  	  	  {php} 
+				  	  	  		$checked = in_array($item['node_id'], $arr); 
+				  	  	  {/php}
+				  	  	  <input lay-filter="p_box" class="p_box" type="checkbox" lay-skin="primary" name="{$item.node_id}" title="{$item.title}" {php} if($checked) echo 'checked' {/php}>
+				  	  </div>
+			  	  </div>
+			  	  <div class="layui-form-item" pane="">
+			  	  	  <div class="layui-input-block">
+			  	  	  {volist name="$item.child" id="val"}
+			  	  	  {php}
+			  	  	  	  $checked	= in_array($val['node_id'], $arr);
+			  	  	  {/php}
+			  	  	  <input lay-filter="s_box" class="s_box" type="checkbox" lay-skin="primary" name="{$val.node_id}" title="{$val.title}" {php} if($checked) echo 'checked' {/php}>
+			  	  	  {/volist}  
+			  	  	  </div>
+			  	  </div>
+				  </span>
+			  	  {/volist}
+			  	  {if condition="$group_id eq 2"}
+				  <span id="GuanPower">工人权限</span><hr style="height:1px;border:none;border-top:1px solid #555555;" />
+			  	  {php} $arr	 = explode(',', $role['node_str']); {/php}
+			  	  {volist name="menus" id="item"}
+				  
+					{php}
+						if($item['job_status']=='1' || $item['job_status']=='3') continue;
+					{/php}
+				  <span>
+			  	  <div class="layui-form-item main_box" pane="">
+				  	  <div class="">
+				  	  	  {php} 
+				  	  	  		$checked = in_array($item['node_id'], $arr); 
+				  	  	  {/php}
+				  	  	  <input lay-filter="p_box" class="p_box" type="checkbox" lay-skin="primary" name="{$item.node_id}" title="{$item.title}" {php} if($checked) echo 'checked' {/php}>
+				  	  </div>
+			  	  </div>
+			  	  <div class="layui-form-item" pane="">
+			  	  	  <div class="layui-input-block">
+			  	  	  {volist name="$item.child" id="val"}
+			  	  	  {php}
+			  	  	  	  $checked	= in_array($val['node_id'], $arr);
+			  	  	  {/php}
+			  	  	  <input lay-filter="s_box" class="s_box" type="checkbox" lay-skin="primary" name="{$val.node_id}" title="{$val.title}" {php} if($checked) echo 'checked' {/php}>
+			  	  	  {/volist}  
+			  	  	  </div>
+			  	  </div>
+				  </span>
+			  	  {/volist}
+			  	  {/if}
+				  <span id="GuanPower">基础权限</span><hr style="height:1px;border:none;border-top:1px solid #555555;" />
+			  	  {php} $arr	 = explode(',', $role['node_str']); {/php}
+			  	  {volist name="menus" id="item"}
+				  
+					{php}
+						if($item['job_status']=='2' || $item['job_status']=='1') continue;
+					{/php}
+				  <span>
+			  	  <div class="layui-form-item main_box" pane="">
+				  	  <div class="">
+				  	  	  {php} 
+				  	  	  		$checked = in_array($item['node_id'], $arr); 
+				  	  	  {/php}
+				  	  	  <input lay-filter="p_box" class="p_box" type="checkbox" lay-skin="primary" name="{$item.node_id}" title="{$item.title}" {php} if($checked) echo 'checked' {/php}>
+				  	  </div>
+			  	  </div>
+			  	  <div class="layui-form-item" pane="">
+			  	  	  <div class="layui-input-block">
+			  	  	  {volist name="$item.child" id="val"}
+			  	  	  {php}
+			  	  	  	  $checked	= in_array($val['node_id'], $arr);
+			  	  	  {/php}
+			  	  	  <input lay-filter="s_box" class="s_box" type="checkbox" lay-skin="primary" name="{$val.node_id}" title="{$val.title}" {php} if($checked) echo 'checked' {/php}>
+			  	  	  {/volist}  
+			  	  	  </div>
+			  	  </div>
+				  </span>
+			  	  {/volist}
+				  
+				  
+				  
+			  </div>
+			  <div class="layui-form-item">
+			      <button class="layui-btn mybtn" lay-submit="" lay-filter="add" type="button">完成</button>
+			      <button type="reset"  class="layui-btn layui-btn-primary">取消</button>
+			  </div>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		layui.use('form', function() {
+			
+			var form	= layui.form;
+			
+			//监听提交
+			form.on('submit(add)', function(data){
+
+				var node_str = '';
+				
+				for(var p in data.field) {
+					
+					if(p != 'grouplists' && p != 'role_name') {
+						
+						node_str = node_str + p + ',';
+					}
+				}
+				
+				node_str = (node_str.substring(node_str.length - 1) == ',') ? node_str.substring(0, node_str.length - 1) : node_str;
+			    
+				var role_id	= '{$role.role_id}';
+				
+				$.post("/home/Role/editsave?phone={$phone}&&token={$token}", {role_id: role_id, role_name:data.field.role_name, node_str: node_str}, function(data) {
+					
+					layer.alert(data, {
+						title:'信息提示'
+					},function(){
+						window.location.href = 'javascript:history.go(-1);';
+					});
+				})
+			});
+			//监听父级checkbox
+			form.on('checkbox(p_box)', function(data){
+				$(data.elem).parents('span').find('.s_box').each(function(){
+					this.checked = data.elem.checked;					
+				});
+				form.render(); //更新全部				
+			}); 
+			//监听子级checkbox
+			form.on('checkbox(s_box)', function(data){									
+				var tag = 0;
+				$(data.elem).parents('span').find('.s_box').each(function(){
+					if(this.checked){
+						tag = 1;						
+						return;
+					}
+				})
+				
+				$(data.elem).parents('span').find('.p_box').each(function(){
+					this.checked = tag ? true : false;
+				})
+				
+				form.render(); //更新全部				
+			});
+				 
+		})
+		$("button:reset").click(function(){
+			
+			window.location.href = 'javascript:history.go(-1);';
+		})
+	</script>
+</html>
+<script type="text/javascript">
+
+</script>

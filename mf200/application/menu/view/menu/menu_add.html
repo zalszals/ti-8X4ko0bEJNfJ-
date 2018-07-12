@@ -1,0 +1,360 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<style>
+    .menu_add{ width: 400px; height:500px; padding-top: 80px; margin-left: 0px; border:none; }
+    .layui-form-item{ padding:10px; width: 600px; border: 1px solid #dedede;}
+    .menu_ad{width: 660px; height: 600px;margin:0 auto;}
+    .menu_ad_left{ width:120px; height:40px; line-height:40px;  font-size:14px; font-family:"微软雅黑","宋体" ; text-align:right; color:#888;}
+    .interest{  width:540px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede; }
+    .interest:hover{  width:540px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede; border:2px solid  #dedede; }
+    #class_c{ width:260px; margin-left:10px;height:32px; line-height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;}
+    #class_c:hover{  width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;  border:2px solid  #dedede;}
+    #add_op{ width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;}
+    #add_op:hover{  width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;  border:2px solid  #dedede;}
+
+    .en_ch{
+        width:540px;  margin-left:10px;
+        border:1px solid #dedede; overflow: hidden;
+        height: 30px; font:normal normal normal 14px/30px 'Microsoft YaHei';
+        border-radius:4px;
+        box-shadow: 1px 0 0 #ddd inset;
+        -webkit-box-shadow: 1px 0 0 #ddd inset;
+        -moz-box-shadow: 1px 0 0 #ddd inset; text-indent:1em;
+    }
+    .sdfsa{width:540px;  margin-left:10px;
+        border:1px solid #dedede; font:normal normal normal 14px/30px 'Microsoft YaHei';
+        border-radius:4px;
+        box-shadow: 1px 0 0 #ddd inset;
+        -webkit-box-shadow: 1px 0 0 #ddd inset;
+        -moz-box-shadow: 1px 0 0 #ddd inset; text-indent:1em;}
+
+    select{padding-left:12px;
+        appearance:none;
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        background: url("/static/images/arrow.png") no-repeat scroll right center transparent;
+        padding-right: 14px; margin-bottom:5px;
+    }
+	
+
+    select::-ms-expand { display: none; }
+    select:hover{ border:2px solid #dedede;}
+
+    .menu_l{width:260px; margin-left:10px;height:32px; border-radius: 3px; box-shadow:1px 1px 2px #dedede;   }
+
+    .demo--label{margin:0px 20px 0 0;display:inline-block;}
+    .demo--radio{display:none}
+    .demo--radioInput{background-color:#fff;border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:10px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1}
+    .demo--radio:checked + .demo--radioInput:after{background-color:#57ad68;border-radius:100%;content:"";display:inline-block;height:12px;margin:2px;width:12px}
+    .demo--checkbox.demo--radioInput,.demo--radio:checked + .demo--checkbox.demo--radioInput:after{border-radius:0}
+    .li_radio{ float:left;  display:inline; font-size:13px; padding:0px 40px 0px 10px; line-height:50px; text-align:left;}
+
+	
+    .new_btn{ width: 100px; height: 30px; display:block;background-color: #00b3ee;color: #fff; margin:0 auto; text-decoration: none;text-align: center; font:normal normal normal 16px/30px 'Microsoft YaHei';cursor: pointer;border-radius: 4px; margin:0 auto; margin-left:160px;}
+</style>
+
+<div class="menu_ad">
+    <table>
+        <form class="layui-form" id="myform" action="">
+        <tr style="padding: 10px 0px;"><td class="menu_ad_left">所属部门(模块)</td>
+            <td><!--<select name="interest" class="interest" ><option value="1" selected="">生管部门</option></select>-->
+			 <select name="quiz1" id="class_c"  onchange="get_son()">
+                    <option value="0">选择部门(模块)</option>
+                    {volist name="pid" id="vo"}
+                    <option value="{$vo.node_id}" id="select_class" >{$vo.title}-{$vo.name}</option>
+                    {/volist}
+                </select>
+			
+			
+			</td>
+        </tr>
+
+        <tr>
+            <td class="menu_ad_left">菜单级别</td>
+            <td> 
+            <select name="modules" class="menu_l" id="modules" onChange="tr_hide()" >
+                <option value="">选择级别</option>
+                <!--<option value="1">模块</option>-->
+                <option value="2">控制器</option>
+                <option value="3">方法名</option>
+            </select>
+            </td>
+        </tr>
+
+        <tr style="padding: 10px 0px;" id="tehide"><td class="menu_ad_left">上级菜单</td>
+            <td>
+               
+
+                <select name="quiz2" id="add_op"  onchange="get_mod()" >
+                    <option value="0">选择控制器</option>                  
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="menu_ad_left" id="neweng">菜单英文名</td>
+            <td><input class="en_ch" type="text" name="english" id="english" />
+                <div id="checkbox" style=" display:inline; font-size:12px; font-weight:bold; line-height:40px;"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="menu_ad_left" id="newchi">菜单中文名</td>
+            <td><input class="en_ch" type="text" name="chinaese" id="chinaese" /></td>
+        </tr>
+
+        <tr>
+            <td class="menu_ad_left">是否启用</td>
+            <!-- <td>
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="sex"  value="1"  checked="checked"/>
+                        <div class="demo--radioInput"></div>是
+                    </label>
+                </div>
+
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="sex"  value="0" />
+                        <div class="demo--radioInput"></div>不是
+                    </label>
+                </div>
+            </td> -->
+			<!-- 换成下拉菜单形式 -->
+			<td>
+				<div class="li_radio">
+					<label class="demo--label">
+						<select name="sex" id="hlchck">
+							<option value="">请选择</option>
+							<option value="0">不启用</option>
+							<option value="1">按钮</option>
+							<option value="2">菜单</option>
+							<option value="3">按钮+菜单</option>
+							<option value="98">公共方法</option>
+							<option value="99">私有方法</option>
+							
+						</select>
+					</label>
+				</div>
+			</td>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+        </tr>
+
+        <!--<tr>
+            <td class="menu_ad_left">是否Ajax调用</td>
+            <td>
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="jajax"  value="1"  checked="checked"/>
+                        <div class="demo--radioInput"></div>是
+                    </label>
+                </div>
+
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="jajax"  value="0" />
+                        <div class="demo--radioInput"></div>不是
+                    </label>
+                </div>
+
+            </td>
+        </tr>-->
+
+        <tr>
+            <td class="menu_ad_left">是否启用Api</td>
+            <td>
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="is_api"  value="1"  checked="checked"/>
+                        <div class="demo--radioInput"></div>是
+                    </label>
+                </div>
+
+                <div class="li_radio">
+                    <label class="demo--label">
+                        <input type="radio" class="demo--radio" name="is_api"  value="0" />
+                        <div class="demo--radioInput"></div>不是
+                    </label>
+                </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="menu_ad_left">作者</td>
+            <td><input name="author" class="en_ch" value="" /></td>    
+        </tr>
+
+         <tr>
+            <td class="menu_ad_left">备注说明</td>
+            <td><textarea name="remark" class="sdfsa" cols ="50" rows = "3"></textarea></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><span id="FormSub" class="new_btn">立即提交</span></td>
+        </tr>
+
+       
+
+    </form>
+    </table>
+</div>
+
+
+</body>
+</html>
+<script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/static/layer/layer.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+
+<script>
+    function tr_hide(){
+        var mode = $("#modules").val();
+        document.getElementById('tehide').style.display = '';
+        document.getElementById('class_c').style.display = '';
+        document.getElementById('add_op').style.display = '';
+        if(mode==1){
+           document.getElementById('tehide').style.display = 'none';
+        }    
+        if(mode==2){
+
+            document.getElementById('tehide').style.display = 'none';
+            document.getElementById('add_op').style.display = 'none';
+            document.getElementById('neweng').innerHTML = '控制器英文名';
+            document.getElementById('newchi').innerHTML = '控制器中文名';
+        }
+        if(mode==3){
+            document.getElementById('class_c').style.display = '';
+            document.getElementById('add_op').style.display = '';
+            document.getElementById('neweng').innerHTML = '方法英文名';
+            document.getElementById('newchi').innerHTML = '方法中文名';
+        }
+    }
+</script>
+
+
+<script>
+/**
+ * 获取下级菜单
+ */
+function get_son(){
+    var node_id = $("#class_c").val();
+    /*var tag = 1;
+    if(!node_id){
+        layer.msg('请选择模块名称!');
+        tag = 0;
+    }
+    if(!tag){
+        return;
+    }*/
+
+    $.ajax({
+        data: {movieId:node_id},
+        type: "post",
+        url: "{:url('menu/Menu/menu_add_select')}",
+        success: function (mg) {
+            $("#add_op").empty();
+            if (mg.selectok == 1) {
+                var stra='<option value="0">选择控制器</option>';
+                $("#add_op").append(stra);
+                $(mg.data).each(function(){
+                    var str = '';
+                    str = '<option value="'+this.node_id+'">'+this.title+'---'+this.name+'</option>';
+                    $("#add_op").append(str);
+                })
+            }
+        }
+    })
+}
+
+</script>
+<script>
+	
+</script>
+
+
+<script>
+
+$(function(){
+    $("#FormSub").on('click',function(){
+        var cla=$("#class_c").val();
+        var eng=$("#english").val();
+        var che=$("#chinaese").val();
+        var mod=$("#modules").val();
+        var dsd=$("#add_op").val();
+        var parent=/^[A-Za-z_]+$/;
+		
+        var tag = 1;
+
+        if(mod==''||mod==0){
+            layer.msg('请选择菜单级别!');
+            tag = 0; return;
+        }
+
+        
+        if(eng==''){
+            layer.msg('请填写菜单英文名!');tag = 0;
+            return;
+        }
+        if(parent.test(eng)){
+            tag = 1;
+        }else{layer.msg('只能填写英文!');tag = 0; return;}
+
+        if(che=='') {
+            layer.msg('请填写菜单中文名!');
+            tag = 0; return;
+        }
+
+        if(dsd==0&& mod==3){
+            layer.msg('菜单级别选择错误!');
+            tag = 0; return;
+        }
+
+        if(!tag){
+            layer.msg('数据填写不正确，请重新检查!');
+            return;
+        }
+
+        var abc=$('#myform').serialize();
+        $.ajax({
+            data:abc,
+            url:"{:url('menu/Menu/menu_add')}",
+            type:'POST',
+            success: function (msg) {
+            if(msg.status==200)
+        {
+            layer.msg(msg.txt,{time:2000},function(){
+			location.reload();
+			});
+        }else
+        {
+            layer.msg(msg.txt,{time:2000});
+        }
+
+    }
+
+    })
+
+})
+
+})
+
+
+</script>

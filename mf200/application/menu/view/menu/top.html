@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>园区管理-顶部</title>
+<link rel="stylesheet" type="text/css" href="{$Think.const.APP_NAME}/Public/css/left_nav/reset.css">
+<link rel="stylesheet" type="text/css" href="{$Think.const.APP_NAME}/Public/css/new/css/priceDouble.css">
+<style>
+html,body{
+	font-size:16px;	
+}
+</style>
+</head>	
+
+<body>	
+<div class="topLine">
+	<ul>
+        <li onClick="change_this(this)"><a href="{$Think.const.APP_NAME}/index.php/Home/FeedBack/feedback" target="mainFrame">提交反馈</a></li>
+		<!--li onClick="change_this(this)"><a href="{$Think.const.APP_NAME}/index.php/Home/MyCenter/index_test" target="mainFrame">个人信息</a></li>
+        <li onClick="change_this(this)"><a href="javascript:;">基础设置</a></li-->
+        <li onClick="change_this(this)"><a href="http://150.138.142.115/handbook/index.html" target="_blank">使用帮助</a></li>
+		<li onClick="change_this(this)"><a href="{$Think.const.APP_NAME}/index.php/Home/MyCenter/change_pwd" target="mainFrame">修改密码</font></a></li>
+		<li onClick="change_this(this)"><a href="http://www.modeng178.com/" target="_blank">摩登庄园</font></a></li>
+    </ul><!--<a href="tencent://message/?uin=382001565&Site=modeng&Menu=yes" charset="mainFrame">-->
+	<p class="off">
+        <i onClick="close1()"><img src="{$Think.const.APP_NAME}/Public/icon/icson_07.png" alt="退出登录"></i>
+        <i onClick="max1()"><img src="{$Think.const.APP_NAME}/Public/icon/icson_05.png" alt="最大化"></i>
+        <i onClick="min1()"><img src="{$Think.const.APP_NAME}/Public/icon/icson_03.png" alt="最小化"></i>
+    </p>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="{$Think.const.APP_NAME}/Public/js/jquery-1.8.2.min.js"></script>
+
+<script type="text/javascript">
+/**
+ * 软件控制
+ */
+try
+{
+	function max1()
+	{
+		//alert('最大化');
+		//formUtils.maxWinForm('摩登庄主园区管理系统(Mini版)');
+		//询问框
+		//layer.confirm('确定要退出吗？', {btn: ['确定','取消']}, function(){});
+		$.ajax({
+			url:'{$Think.const.APP_NAME}/index.php/Home/Login/login_out',
+			success:function(re){
+				if(re.status==1){
+					parent.location.href="{$Think.const.APP_NAME}/index.php/Home/Login";
+				}
+			}			
+		})	
+		
+	}
+	function min1()
+	{
+		//alert('最小化');
+		formUtils.minWinForm('摩登庄主园区管理系统(Mini版)');
+	}
+	function close1()
+	{
+		//alert('关闭');
+		formUtils.closeWinForm('摩登庄主园区管理系统(Mini版)');
+	}
+
+	formUtils.maxWinForm('摩登庄主园区管理系统(Mini版)');
+	//formUtils.hideWinForm('');		
+}
+catch (e)
+{
+	//alert(e);
+}
+/**
+ * 退出登录
+ */
+function loginOut(){
+	$.ajax({
+		url:'{$Think.const.APP_NAME}/index.php/Home/Login/login_out.html',
+		dataType:'json',
+		success:function(re){
+			if(re.status==1){
+				top.location.href = "{$Think.const.APP_NAME}/index.php";
+			}
+		}
+	})
+}
+/**
+ * 改变选中
+ */
+function change_this(obj){
+	$('.h35').removeClass('on');
+	$(obj).addClass('on');
+}
+
+$('.topLine li').click(function(event) {
+			$(this).css('background','#2cbee8').siblings().css('background','#253145');
+			$(this).children('a').css('color','#fff').parent().siblings().children('a').css('color','#757f93');
+		});
+
+
+		$('.leftPart .nav_list li:not(.nol,.nol2)').click(function(event) {
+			$(this).children('a').css('color','#2cbee8').parent().siblings().children('a').css('color','#687285');
+			$(this).css({'border-left':'3px solid #2cbee8','background':'#1f2a3c'}).siblings().css({'border-left':'3px solid #253145','background':'#253145'})
+			$(this).find('.img1').hide().parents('li').siblings().find('.img1').show();
+			$(this).find('.img2').show().parents('li').siblings().find('.img2').hide();
+		});
+
+		$('.work li').click(function(event) {
+			$(this).css('border-left','4px solid #2cbee8').siblings().css('border-left','4px solid #fff');
+			$(this).children('a').css('color','#2cbee8').parent().siblings().children('a').css('color','#6c6c6c');
+		});
+
+		$('.gou li').click(function(event) {
+			$(this).css('border-left','4px solid #2cbee8').siblings().css('border-left','4px solid #fff');
+			$(this).children('a').css('color','#2cbee8').parent().siblings().children('a').css('color','#6c6c6c');
+		});
+		
+$(window).load(function ()
+{
+  var whdef = 16/1920;          
+  var wH = window.innerHeight;
+  var wW = window.innerWidth;
+  var rem = wW * whdef;
+  $('html').css('font-size', rem + "px");
+});		
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		border: 0;
+		list-style: none;
+		font-size: 70px;
+	}
+	div{
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+	.color {
+		background-color: white;
+	}
+
+	.color:nth-child(2n) {
+
+		background-color: #F9F9F9;
+	}
+
+</style>
+<body>
+<div>
+	<ul>
+		<li class="color"><p>生产计划编号 ： </p></li>
+		<li class="color"><p>种植任务 ： </p></li>
+		<li class="color"><p>负责人 ： 刘涛</p></li>
+		<li class="color"><p>作物 ： 甜瓜</p></li>
+		<li class="color"><p>果形 ： 原型</p></li>
+		<li class="color"><p>果色 ： 白色</p></li>
+		<li class="color"><p>品种 ： 比美</p></li>
+		<li class="color"><p>种植模式 ： 有土栽培</p></li>
+		<li class="color"><p>种植区域 ： 1号玻璃温室</p></li>
+		<li class="color"><p>株距 ： 80cm</p></li>
+		<li class="color"><p>行距 ： 160cm</p></li>
+		<li class="color"><p>定植时间 ： 2018-03-24</p></li>
+		<li class="color"><p>采收时间 ： 2018-02-24</p></li>
+	</ul>
+</div>
+</body>
+</html>

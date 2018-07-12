@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		border: 0;
+		list-style: none;
+		font-size: 70px;
+	}
+	div{
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+	.color {
+		background-color: white;
+	}
+
+	.color:nth-child(2n) {
+
+		background-color: #F9F9F9;
+	}
+
+</style>
+<body>
+<div>
+	<ul>
+		<li class="color"><p>生产计划编号 ：{$data.plan_name} </p></li>
+		<li class="color"><p>种植任务 ： {$data.t_name}</p></li>
+		<li class="color"><p>负责人 ： {$data.worker_name}</p></li>
+		<li class="color"><p>作物 ： {$data.p_name}</p></li>
+		<li class="color"><p>果形 ： {$data.ftype}</p></li>
+		<li class="color"><p>果色 ： {$data.fcolor}</p></li>
+		<li class="color"><p>品种 ： {$data.cat_name}</p></li>
+		<li class="color"><p>种植模式 ： {$data.mode_name}</p></li>
+		<li class="color"><p>种植区域 ： {$data.area_name}</p></li>
+		<li class="color"><p>株距 ：  {$data.zhu_ju} cm</p></li>
+		<li class="color"><p>行距 ： {$data.hang_ju} cm</p></li>
+		<li class="color"><p>定植时间 ： {$data.grow_date}</p></li>
+		<li class="color"><p>采收时间 ： {$data.get_time}</p></li>
+	</ul>
+		<!-- <ul>
+			<li class="color"><p>商品名称 ：{$info.m_name} </p></li>
+			<li class="color"><p>批 次 号 ： {$info.batch_no}</p></li>
+			<li class="color"><p>订单数量 ： {$info.m_num} {$info.unit}</p></li>
+			<li class="color"><p>包装要求 ： {$info.ask_info}</p></li>
+			<li class="color"><p>附加要求： {$info.other_ask}</p></li>
+			<li class="color"><p>客户名称 ： {$info.customer_name}</p></li>
+			<li class="color"><p>客户地址 ： {$info.customer_address}</p></li>
+			<li class="color"><p>客户电话 ： {$info.customer_phone}</p></li>
+			<li class="color"><p>发货时间 ： {$info.real_time}</p></li>
+				<li class="color"><p>快  递 ： {$info.car_kdgs}</p></li>
+				<li class="color"><p>快递单号 ：  {$info.car_kddh}</p></li>
+
+				<li class="color"><p>车辆型号 ： {$info.car_clxh}</p></li>
+				<li class="color"><p>车牌号 ：  {$info.car_cp}</p></li>
+				<li class="color"><p>运输类型 ：  {$info.car_yslx}</p></li>
+				<li class="color"><p>司机姓名 ：  {$info.car_sjxm}</p></li>
+				<li class="color"><p>联系方式：  {$info.car_lxfs}</p></li>
+		</ul> -->
+</div>
+</body>
+</html>
