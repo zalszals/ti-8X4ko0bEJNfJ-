@@ -123,29 +123,29 @@
 
                         <div class="form-group" style=" margin-right:60px; display:block;"> 
                             <label class="newlabel" style="display:block"><p>种植面积</p></label>
-                            <input type="text" class="form-controlb" name="grow_area_2" style="width:200px; display:inline-block" placeholder="请输入面积"><span class="spaninline" style="width:130px; text-align:left;" > 平方米 </span>
+                            <input type="text" class="form-controlb" name="grow_area_2" style="width:200px; display:inline-block" placeholder="请输入面积" @input="input1()"><span class="spaninline" style="width:130px; text-align:left;" > 平方米 </span>
                         </div>
 
                         
                         <div class="form-group" style="margin-right:60px; display:inline-block; ">
                             <label class="newlabel" style="display:block">预估总产量</label>
-                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="estimate_amount" placeholder="总产量预估"><span class="spaninline" > Kg </span>
+                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="estimate_amount" placeholder="总产量预估" @input="input2()"><span class="spaninline" > Kg </span>
                         </div>
 
                         <p>预估成本</p>
                         <div class="form-group" style="margin-right:60px; display:inline-block; ">
                             <label class="newlabel" style="display:block">预估人工成本</label>
-                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="cost_worker" placeholder="请输入预估值"><span class="spaninline" > 元 </span>
+                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="cost_worker" placeholder="请输入预估值" @input="input3()"><span class="spaninline" > 元 </span>
                         </div>
 
                         <div class="form-group" style="margin-right:60px; display:inline-block; ">
                             <label class="newlabel" style="display:block">预估物料成本</label>
-                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="cost_materiel" placeholder="请输入预估值"><span class="spaninline" > 元 </span>
+                            <input type="text" class="form-controlb" style="width:200px; display:inline-block" name="cost_materiel" placeholder="请输入预估值" @input="input3()"><span class="spaninline"> 元 </span>
                         </div>
 
                         <div class="form-group" style="margin-right:60px; display:inline-block; ">
                             <label class="newlabel" style="display:block">预估能耗成本</label>
-                            <input type="text" class="form-controlb" id="nenghao" v-on:blur="thisupa()" style="width:200px; display:inline-block" name="cost_amount" placeholder="请输入预估值"><span class="spaninline" > 元 </span>
+                            <input type="text" class="form-controlb" id="nenghao" v-on:blur="thisupa()" style="width:200px; display:inline-block" name="cost_amount" placeholder="请输入预估值" @input="input3()"><span class="spaninline" > 元 </span>
                         </div>
                         
                         <label class="newlabel" style="display:block">总成本 <input type="text" style="border:none;  width:120px; background:none;" name="newsum" v-bind:value="sunmoney" /> 元</label>
@@ -176,16 +176,33 @@
 
                             <div class="form-group" style="margin-right:60px; display:inline-block;">
                                 <label class="newlabel" style="display:block">种植面积</label>
-                                <input type="text" class="form-control" id="zhongzhival0" style="width:200px; display:inline-block" placeholder="请输入预估值" v-on:blur="dosmthing()"><span class="spaninline" style="width:130px; text-align:left;"> 平方米 </span>
+                                <input type="text" class="form-control" id="zhongzhival0" style="width:200px; display:inline-block" placeholder="请输入预估值" v-on:blur="dosmthing()" @input="input1()"><span class="spaninline" style="width:130px; text-align:left;" > 平方米 </span>
                             </div>
 
                             <div class="form-group" style="margin-right:60px; display:inline-block; ">
                                 <label class="newlabel" style="display:block">目标产量</label>
-                                <input type="text" class="form-control" id="mubiaoval0" v-on:blur="thisupb()"  style="width:200px; display:inline-block" placeholder="请输入预估值"><span class="spaninline" > Kg </span>
+                                <input type="text" class="form-control" id="mubiaoval0" v-on:blur="thisupb()"  style="width:200px; display:inline-block" placeholder="请输入预估值" @input="input2()"><span class="spaninline" > Kg </span>
                             </div>
-
                         </li>
-
+                        <li v-for="(item,index) in arr" :key="index">
+                          <h4 style='color:#f2a553; line-height:40px;'>负责人</h4>
+                          <div class='form-group' style='margin-right:60px; display:block;'>
+                            <label class='newlabel' style='display:block'><p>选择生产计划负责人</p></label>
+                            <select class='form-control' :id="'selval'+(index+1)" name='atest' style='width:200px;display:inline-block' >
+                              <option value="0">请选择生产计划负责人</option>
+                              <option v-for="listman in manall" v-bind:value="listman.worker_id">{{listman.worker_name}}</option>
+                            </select> 
+                            <span class='spaninline' @click='delman(index)'><img src='/lib/img/public/cropmode/jianjian.png'/></span>
+                          </div>
+                          <div class='form-group' style='margin-right:60px; display:inline-block;'>
+                            <label class='newlabel' style='display:block'>种植面积</label>
+                            <input type='text' :id="'zhongzhival'+(index+1)" class='form-control' style='width:200px; display:inline-block' placeholder='请输入预估值' onchick='dothing()' @input="input1()"><span class='spaninline' > 平米 </span>
+                          </div>
+                          <div class='form-group' style='margin-right:60px; display:inline-block;'>
+                            <label class='newlabel' style='display:block'>目标产量</label>
+                            <input type='text' :id="'mubiaoval'+(index+1)" class='form-control' style='width:200px; display:inline-block' placeholder='请输入预估值' @input="input2()"><span class='spaninline' > Kg </span>
+                          </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -207,10 +224,11 @@ export default {
       addnum:1,
       newaddid:'',
       catid:'',
-      sunmoney:'',
+      sunmoney:0,
       summi:0,
       sumchl:0,
-      disabled:false
+      disabled:false,
+      arr:[]
     }
   },
 
@@ -245,7 +263,7 @@ export default {
     },
 
     thisupa() {
-      this.sunmoney=parseInt($("input[name='cost_worker']").val())+parseInt($("input[name='cost_materiel']").val())+parseInt($("input[name='cost_amount']").val());
+      //this.sunmoney=parseInt($("input[name='cost_worker']").val())+parseInt($("input[name='cost_materiel']").val())+parseInt($("input[name='cost_amount']").val());
       this.summi=$("input[name='grow_area_2']").val();
       this.sumchl=$("input[name='estimate_amount']").val();
 
@@ -290,40 +308,68 @@ export default {
       this.newaddid=newnum;
       //1.js循环出数据
       var abc = this.manall;
-      var that=this;
-      $(".addright-centerb ul").append("<li><h4 style='color:#f2a553; line-height:40px;'>负责人</h4><div class='form-group' style='margin-right:60px; display:block;'><label class='newlabel' style='display:block'><p>选择生产计划负责人</p></label><select class='form-control' id=selval"+newnum+" name='atest' style='width:200px;display:inline-block' ><option>请选择生产计划负责人</option></select></div><div class='form-group' style='margin-right:60px; display:inline-block;'><label class='newlabel' style='display:block'>种植面积</label><input type='text' id=zhongzhival"+newnum+" class='form-control' style='width:200px; display:inline-block' placeholder='' onchick='dothing()'><span class='spaninline' > 平米 </span></div><div class='form-group' style='margin-right:60px; display:inline-block;'><label class='newlabel' style='display:block'>目标产量</label><input type='text' id=mubiaoval"+newnum+" class='form-control' style='width:200px; display:inline-block' placeholder=''><span class='spaninline' > Kg </span></div></li>")
-      .find("#mubiaoval"+newnum).blur(function(){
+      this.arr.push(newnum);
+      // var that=this;
+      // $(".addright-centerb ul").append("<li id=delman"+newnum+"><h4 style='color:#f2a553; line-height:40px;'>负责人</h4><div class='form-group' style='margin-right:60px; display:block;'><label class='newlabel' style='display:block'><p>选择生产计划负责人</p></label><select class='form-control' id=selval"+newnum+" name='atest' style='width:200px;display:inline-block' ><option>请选择生产计划负责人</option></select><span class='spaninline' onclick='delman("+newnum+")'> <img src='/lib/img/public/cropmode/jianjian.png'/></span></div><div class='form-group' style='margin-right:60px; display:inline-block;'><label class='newlabel' style='display:block'>种植面积</label><input type='text' id=zhongzhival"+newnum+" class='form-control' style='width:200px; display:inline-block' placeholder='' onchick='dothing()'><span class='spaninline' > 平米 </span></div><div class='form-group' style='margin-right:60px; display:inline-block;'><label class='newlabel' style='display:block'>目标产量</label><input type='text' id=mubiaoval"+newnum+" class='form-control' style='width:200px; display:inline-block' placeholder=''><span class='spaninline' > Kg </span></div></li>")
+      // .find("#mubiaoval"+newnum).blur(function(){
 
-             var spingmi=$("input[name='grow_area_2']").val();
+      //        var spingmi=$("input[name='grow_area_2']").val();
             
-             var schanliang=$("input[name='estimate_amount']").val();
-             var snu=newnum+1;
-             var newsum=0;var newsumchl=0;
-             for(var i=0;i<snu;i++){
+      //        var schanliang=$("input[name='estimate_amount']").val();
+      //        var snu=newnum+1;
+      //        var newsum=0;var newsumchl=0;
+      //        for(var i=0;i<snu;i++){
 
-                newsum += parseInt($("#zhongzhival"+i).val());
-                //newsum+=$("#zhongzhival"+i).val();
-                newsumchl+=parseInt($("#mubiaoval"+i).val());
+      //           newsum += parseInt($("#zhongzhival"+i).val());
+      //           //newsum+=$("#zhongzhival"+i).val();
+      //           newsumchl+=parseInt($("#mubiaoval"+i).val());
 
-             }
+      //        }
             
-             var cha=parseInt(spingmi)-parseInt(newsum);
-             var chaa=parseInt(schanliang)-parseInt(newsumchl);
+      //        var cha=parseInt(spingmi)-parseInt(newsum);
+      //        var chaa=parseInt(schanliang)-parseInt(newsumchl);
 
-             that.summi=cha;  that.sumchl=chaa; 
+      //        that.summi=cha;  that.sumchl=chaa; 
 
-      });
+      // });
 
-      for(var i=0;i<abc.length;i++){
+      // for(var i=0;i<abc.length;i++){
 
-        var op="<option value="+abc[i]['worker_id']+">"+abc[i]['worker_name']+"</option>";
+      //   var op="<option value="+abc[i]['worker_id']+">"+abc[i]['worker_name']+"</option>";
 
-        $("#selval"+newnum).append(op);
-        //console.log(op);    
-      }
+      //   $("#selval"+newnum).append(op);
+      //   //console.log(op);    
+      // }
       //2.赋值
       //$(".addright-centerb ul").append(this.addhtml);
 
+    },
+    delman(index){
+      this.arr.splice(index);
+      if($("input[name='grow_area_2']").val() && !isNaN($("input[name='grow_area_2']").val())){
+          var area = 0;
+          for(var n=0;n<this.arr.length+1;n++){
+            if($("#zhongzhival"+n).val()&&!isNaN($("#zhongzhival"+n).val())){
+               area = area + $("#zhongzhival"+n).val()*1;
+            } 
+          }
+          this.summi = $("input[name='grow_area_2']").val()*1 - area;
+          if(this.summi < 0){
+            this.summi = 0;
+          }
+      }
+      if($("input[name='estimate_amount']").val() && !isNaN($("input[name='estimate_amount']").val())){
+        var area_num = 0;
+        for(var n=0;n<this.arr.length+1;n++){
+          if($("#mubiaoval"+n).val()&&!isNaN($("#mubiaoval"+n).val())){
+            area_num = area_num + $("#zhongzhival"+n).val()*1;
+          } 
+        }
+        this.sumchl = $("input[name='estimate_amount']").val()*1 - area_num;
+        if(this.sumchl < 0){
+          this.sumchl = 0;
+        }
+      }
     },
 
     //获取作物下拉框
@@ -402,53 +448,59 @@ export default {
     //添加执行
     doadd() {
       this.disabled = true;
-      setTimeout(() => {
-        this.disabled = false;
-      }, 30000)
       var sendData = {};
       var jsonData = {};
       sendData.url ="index.php/pc/ProductPlan/add_product_plan";
       jsonData.cat_id=this.newpid;
       if(!jsonData.cat_id){
         layer.msg('请选择作物信息');
+        this.disabled = false;
         return;
       }
       jsonData.grow_date = $("input[name='grow_time']").val();
       if(!jsonData.grow_date){
         layer.msg('请选择定植日期');
+        this.disabled = false;
         return;
       }
       jsonData.estimate_get_date_1 = $("input[name='estimate_get_date_1']").val();
       if(!jsonData.estimate_get_date_1){
         layer.msg('请选择采收开始日期');
+        this.disabled = false;
         return;
       }
       jsonData.estimate_get_date_2 = $("input[name='estimate_get_date_2']").val();
       if(!jsonData.estimate_get_date_2){
         layer.msg('请选择采收结束日期');
+        this.disabled = false;
         return;
       }
       if(new Date(jsonData.estimate_get_date_1.replace("-", "/").replace("-", "/")) > new Date(jsonData.estimate_get_date_2.replace("-", "/").replace("-", "/"))){
         layer.msg('采收结束日期应大于采收开始日期');
+        this.disabled = false;
         return;
       }
       jsonData.grow_area_1 = 0;
       jsonData.grow_area_2 = $("input[name='grow_area_2']").val();
       if(!jsonData.grow_area_2){
         layer.msg('请输入种植面积');
+        this.disabled = false;
         return;
       }
       if (isNaN(jsonData.grow_area_2)) {
         layer.msg('种植面积必须为数字');
+        this.disabled = false;
         return;
       }
       jsonData.estimate_amount = $("input[name='estimate_amount']").val();
       if(!jsonData.estimate_amount){
         layer.msg('请输入总产量');
+        this.disabled = false;
         return;
       }
       if (isNaN(jsonData.estimate_amount)) {
         layer.msg('总产量必须为数字');
+        this.disabled = false;
         return;
       }
       jsonData.estimate_amount_one_date = $("input[name='estimate_amount_one_date']").val();
@@ -457,20 +509,23 @@ export default {
       jsonData.cost_amount = $("input[name='cost_amount']").val();
       jsonData.cost_total = $("input[name='newsum']").val();
       if(jsonData.cost_worker){
-        if (isNaN(jsonData.cost_worker)) {
+        if(isNaN(jsonData.cost_worker)) {
           layer.msg('人工成本必须为数字');
+          this.disabled = false;
           return;
         }
       }
       if(jsonData.cost_materiel){
         if (isNaN(jsonData.cost_materiel)) {
           layer.msg('物料成本必须为数字');
+          this.disabled = false;
           return;
         }
       }
       if(jsonData.cost_amount){
         if (isNaN(jsonData.cost_amount)) {
           layer.msg('能耗成本必须为数字');
+          this.disabled = false;
           return;
         }
       }
@@ -480,35 +535,65 @@ export default {
       anum=anum+1;
 
       var arr=[];
-      for(var n=0;n<anum;n++){ 
+      var area = 0;
+      var area_num = 0;
+      for(var n=0;n<this.arr.length+1;n++){ 
         if($("#selval"+n).val() != 0 || $("#zhongzhival"+n).val().length != 0 || $("#mubiaoval"+n).val().length != 0){ 
           if($("#selval"+n).val() == 0){
             layer.msg('请选择生产计划负责人');
+            this.disabled = false;
             return;
           }
           if($("#zhongzhival"+n).val().length == 0){
             layer.msg('请输入负责人种植面积');
+            this.disabled = false;
             return;
           }
           if (isNaN($("#zhongzhival"+n).val())) {
             layer.msg('负责人种植面积必须为数字');
+            this.disabled = false;
             return;
           }
           if($("#mubiaoval"+n).val().length == 0){
             layer.msg('请输入负责人目标产量');
+            this.disabled = false;            
             return;
           }
           if (isNaN($("#mubiaoval"+n).val())) {
             layer.msg('负责人目标产量必须为数字');
+            this.disabled = false;            
             return;
           }
+          area = area + $("#zhongzhival"+n).val()*1;
+          area_num = area_num + $("#mubiaoval"+n).val()*1;
           arr.push([$("#selval"+n).val(),$("#zhongzhival"+n).val(),$("#mubiaoval"+n).val()]);
         }
       }
 
       if(arr.length == 0){
           layer.msg('负责人信息为空');
+          this.disabled = false;  
           return;
+      }
+      if(area < jsonData.grow_area_2){
+        layer.msg('请分配完面积');
+        this.disabled = false;  
+        return;
+      }
+      if(area > jsonData.grow_area_2){
+        layer.msg('分配面积之和不能大于总种植面积');
+        this.disabled = false;  
+        return;
+      }
+      if(area_num < jsonData.estimate_amount){
+        layer.msg('请分配完产量');
+        this.disabled = false; 
+        return;
+      }
+      if(area_num > jsonData.estimate_amount){
+        layer.msg('分配产量之和不能大于总产量');
+        this.disabled = false; 
+        return;
       }
 
       var tree = "[";
@@ -531,7 +616,6 @@ export default {
       jsonData.fzr_worker=tree;
       sendData.data = jsonData;
       var re = getFaceInfo(sendData);
-      console.log(jsonData);
       if(re.status==1){
         layer.msg(re.msg, { time: 1500 }, function() {
           window.location.href="#/product/productplan/pro_plan";
@@ -617,10 +701,53 @@ export default {
     dothing(){
       alert("ok");
     },
-
-    
+    input1(){
+      if($("input[name='grow_area_2']").val() && !isNaN($("input[name='grow_area_2']").val())){
+          var area = 0;
+          for(var n=0;n<this.arr.length+1;n++){
+            if($("#zhongzhival"+n).val()&&!isNaN($("#zhongzhival"+n).val())){
+               area = area + $("#zhongzhival"+n).val()*1;
+            } 
+          }
+          this.summi = $("input[name='grow_area_2']").val()*1 - area;
+          if(this.summi < 0){
+            this.summi = 0;
+          }
+      }
+    },
+    input2(){
+      if($("input[name='estimate_amount']").val() && !isNaN($("input[name='estimate_amount']").val())){
+        var area_num = 0;
+        for(var n=0;n<this.arr.length+1;n++){
+          if($("#mubiaoval"+n).val()&&!isNaN($("#mubiaoval"+n).val())){
+            area_num = area_num + $("#zhongzhival"+n).val()*1;
+          } 
+        }
+        this.sumchl = $("input[name='estimate_amount']").val()*1 - area_num;
+        if(this.sumchl < 0){
+          this.sumchl = 0;
+        }
+      }
+    },
+    input3(){
+      if($("input[name='cost_worker']").val() && !isNaN($("input[name='cost_worker']").val())){
+          this.sunmoney = $("input[name='cost_worker']").val()*1 ;
+      }else{
+          this.sunmoney = 0;
+      }
+      if($("input[name='cost_materiel']").val() && !isNaN($("input[name='cost_materiel']").val())){
+          this.sunmoney = this.sunmoney + $("input[name='cost_materiel']").val()*1 ;
+      }else{
+          this.sunmoney = this.sunmoney + 0;
+      }
+      if($("input[name='cost_amount']").val() && !isNaN($("input[name='cost_amount']").val())){
+          this.sunmoney = this.sunmoney + $("input[name='cost_amount']").val()*1 ;
+      }else{
+          this.sunmoney = this.sunmoney + 0;
+      }
+    }
   }
-};
+}
 </script>
 <style scoped>
 .newdivtop {

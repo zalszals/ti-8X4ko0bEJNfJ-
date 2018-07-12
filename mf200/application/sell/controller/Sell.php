@@ -422,6 +422,8 @@ class Sell extends Base{
 					}else{
 						$list[$k]['have_name'] ='订单生产化';
 					}
+					//判断是否有生产任务
+					
 					
 					
 				}
@@ -475,10 +477,10 @@ class Sell extends Base{
 			$worker_info = array();
 			if($type=='1'){
 				$count = Db::name("sell_order")->where('order_type = '.$order_type.' and check_status = 0 '.$where)->count();
-				$worker_info = Db::name("sell_order")->where('order_type ='.$order_type.' and check_status = 0 '.$where)->field('total_money,order_no,company_name,add_worker_id,is_have,add_time,check_status,order_id,add_time,start_time,end_time,submit_time,check_remark')->order('add_time desc')->limit($page,$row)->select();
+				$worker_info = Db::name("sell_order")->where('order_type ='.$order_type.' and check_status = 0 '.$where)->field('order_id,total_money,order_no,company_name,add_worker_id,is_have,add_time,check_status,order_id,add_time,start_time,end_time,submit_time,check_remark')->order('add_time desc')->limit($page,$row)->select();
 			}else{
 				$count = Db::name("sell_order")->where('order_type = '.$order_type.' and check_status != 0 '.$where)->count();
-				$worker_info = Db::name("sell_order")->where('order_type = '.$order_type.' and check_status != 0 '.$where)->field('total_money,order_no,is_have,add_worker_id,company_name,add_time,check_status,order_id,add_time,start_time,end_time,submit_time,check_remark')->order('add_time desc')->limit($page,$row)->select();
+				$worker_info = Db::name("sell_order")->where('order_type = '.$order_type.' and check_status != 0 '.$where)->field('order_id,total_money,order_no,is_have,add_worker_id,company_name,add_time,check_status,order_id,add_time,start_time,end_time,submit_time,check_remark')->order('add_time desc')->limit($page,$row)->select();
 			}
 
 		 
@@ -508,6 +510,14 @@ class Sell extends Base{
 						}
 					}else{
 						$worker_info[$k]['add_worker_id']='';
+					}
+					//获取生产任务信息
+					$task_info = array();
+					$task_info = Db::name("sell_product_task")->where('order_id = '.$v['order_id'])->field('sell_product_id')->find();
+					if($task_info){
+						$worker_info[$k]['sell_product_id'] = $task_info['sell_product_id'];
+					}else{
+						$worker_info[$k]['sell_product_id'] = '';
 					}
 					
 				}
@@ -638,6 +648,8 @@ class Sell extends Base{
 								$new_data['order_no'] = $order_info['order_no'];
 								$new_data['add_worker_id'] = $order_info['add_worker_id'];
 								$new_data['submit_time'] = $order_info['submit_time'];
+								$new_data['start_time'] = $order_info['start_time'];
+								$new_data['end_time'] = $order_info['end_time'];
 								$new_data['cat_id'] = $v['cat_id'];
 						 
 								$new_data['order_num'] = $v['order_num'];
@@ -820,6 +832,15 @@ class Sell extends Base{
 						$worker_info[$k]['cash_money'] = 0;
 					}
 				}
+				//获取生产任务信息
+				$task_info = array();
+				$task_info = Db::name("sell_product_task")->where('order_id = '.$v['order_id'])->field('sell_product_id')->find();
+				if($task_info){
+					$worker_info[$k]['sell_product_id'] = $task_info['sell_product_id'];
+				}else{
+					$worker_info[$k]['sell_product_id'] = '';
+				}
+ 
 				
 			}
 		}
@@ -2314,9 +2335,8 @@ class Sell extends Base{
 
 					$task_info[$k]['all_sum'] = $all_sum;
 					$task_info[$k]['bei_sum'] = $bei_sum;
-				 
-				 
-					
+
+				}else{
 					
 				}
 				
@@ -2643,6 +2663,8 @@ class Sell extends Base{
 			foreach($task_info as $k=>$v){
 				$task_info[$k]['add_time'] =  date('Y-m-d',$v['add_time']);
 				$task_info[$k]['submit_time'] =  date('Y-m-d',$v['submit_time']);
+				$task_info[$k]['start_time'] =  date('Y-m-d',$v['start_time']);
+				$task_info[$k]['end_time'] =  date('Y-m-d',$v['end_time']);
 				//获取发布人姓名
 				$check_people = Db::name("worker")->where('worker_id = '.$v['add_worker_id'])->field('worker_id,worker_name')->find();
 				if($check_people){

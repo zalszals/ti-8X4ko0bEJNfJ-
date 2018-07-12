@@ -74,13 +74,13 @@
 			<ul class="pages" v-if="pages > 1">
 				<li @click="getlists(truepage-1)">上一页</li>
 				<template v-for="(item,index) in 10">
-					<template v-if="truepage%10==0">
-						<li :key="index" @click="getlists(Math.floor(truepage/10)*10)" :class="truepage%10 == item - 10 ? 'or' : ''">{{Math.abs((-item-(truepage-1)+((Math.floor(truepage/10)*10)+10))-10)+1+truepage-10}}</li>	
-					</template>
-					<template v-else>	
-						<li :key="index" @click="getlists(Math.floor(truepage/10)*10+item)" :class="truepage%10 == item ? 'or' : ''">{{Math.floor(truepage/10)*10+item}}</li>
-					</template>
+					<template v-if="Math.floor((truepage-1)/10)*10+item <= pages">					
+					<li :key="index" @click="getlists(Math.floor((truepage-1)/10)*10+item)" :class="truepage%10 == item || truepage%10 == 0 && item == 10 ? 'or' : ''" >
+					{{Math.floor((truepage-1)/10)*10+item}}
+					</li>						
+					</template>						
 				</template>
+
 				<li @click="getlists(truepage+1)">下一页</li>
 			</ul>
 		</div>
@@ -92,7 +92,7 @@
 		data() {
 			return {
 				lists: [],
-				pages: 32,
+				pages: 1,
             	get_materiel_cat:[],
             	page:'',
 				truepage: 1,
@@ -101,6 +101,12 @@
 		},
 		mounted: function() {			
 			this.getlists(this.truepage);
+			laydate.render({
+				elem: '#ECalendar_case1' //指定元素
+			});				
+			laydate.render({
+				elem: '#ECalendar_case2' //指定元素
+			});
 	 	},
 
 		methods:{ 
@@ -108,7 +114,7 @@
 				page = page > this.pages ? this.pages : page;
 				page = page < 1 ? 1 : page; 
 				this.truepage = page;				
-				alert(this.truepage);				
+				// alert(this.truepage);				
 				var type = $("#type option:selected").attr("value");		 
 			 
 				var start_time = $("#ECalendar_case1").val();
@@ -130,7 +136,7 @@
 				};
 				var re = getFaceInfo(sendData);
 				this.get_materiel_cat = re.data.list;
-				//this.pages = re.data.pages;
+				this.pages = re.data.pages;
                 this.page = re.data.page;
    			},
 			aaa:function(){

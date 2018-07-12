@@ -2679,6 +2679,9 @@ class Deprot extends Base{
 		$type = $this->request->param('type');	//通过 1
 		$reply = $this->request->param('reply')?$this->request->param('reply'):'';	//insert_id
 		$batch = json_decode($this->request->param('batch'),true);
+		if($batch == [[]]){
+			return json(['status'=>0,'msg'=>"批次不能为空"]);
+		}
 		$detail_id = $this->request->param('detail_id');
 		if($type=='1'){
 				
