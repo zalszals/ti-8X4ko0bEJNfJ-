@@ -24,7 +24,7 @@
 				  <option value="3">调休</option>
 				  <option value="4">出差</option>
 				</select>
-                <button @click="search()">筛选</button>
+                <button @click="getlist(1)">筛选</button>
 				<button @click="jq()">请假</button>
                 <button @click="jb()">加班</button>
                 <button @click="tx()">调休</button>
@@ -191,23 +191,6 @@
 				sendData.url = "/index.php/pc/Leave/regroup";
 				jsonData.page = page;
 				jsonData.class_type = 2;
-				jsonData.type = $('#select').val();;
-				sendData.data = jsonData;
-				var re = getFaceInfo(sendData);
-				if(re.status == 1){
-					this.data = re.data;
-					this.pages = re.total.pages;
-					this.page = re.total.page;
-				}else{
-					layer.msg(re.msg);
-				}
-			},
-			search(){
-				var sendData = {};
-				var jsonData = {};
-				sendData.url = "/index.php/pc/Leave/regroup";
-				jsonData.page = 1;
-				jsonData.class_type = 2;
 				jsonData.type = $('#select').val();
 				jsonData.start = $('#ECalendar_case1').val();
 				jsonData.end = $('#ECalendar_case2').val();
@@ -231,7 +214,7 @@
 				var jsonData = {};
 				sendData.url = "/index.php/pc/Leave/regroup";
 				jsonData.page = 1;
-				jsonData.class_type = 1;
+				jsonData.class_type = 2;
 				jsonData.type = $('#select').val();
 				sendData.data = jsonData;
 				var re = getFaceInfo(sendData);

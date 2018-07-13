@@ -22,7 +22,7 @@
                 <input type="text" name="worker" class='ECalendar input' placeholder="请输入申请人名称" id="worker"/>
                 <input type="text" name="group" class='ECalendar input' placeholder="请输入申请部门名称" id="group"/>
                 <input type="text" name="supply" class='ECalendar input' placeholder="请输入供应商名称" id="supply"/>
-                <button @click="search()" class="button or">搜索</button>
+                <button @click="getlist(1)" class="button or">搜索</button>
             </div>
         </div>
     </div>
@@ -163,6 +163,11 @@ export default {
                 sendData.url = "/index.php/pc/Order/ruku_list";
                 jsonData.page = page;
                 jsonData.type = $('#select').val();
+                jsonData.start = $('#ECalendar_case1').val();
+                jsonData.end = $('#ECalendar_case2').val();
+                jsonData.supply_name = $('#supply').val();
+                jsonData.worker_name = $('#worker').val();
+                jsonData.group_name = $('#group').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
@@ -179,27 +184,6 @@ export default {
                 sendData.url = "/index.php/pc/Order/ruku_list";
                 jsonData.page = 1;
                 jsonData.type = $('#select').val();
-                sendData.data = jsonData;
-                var re = getFaceInfo(sendData);
-                if(re.status == 1){
-                    this.data = re.data;
-					this.pages = re.total.pages;
-					this.page = re.total.page;
-                }else{
-                    layer.msg(re.msg);
-                }
-            },
-            search(){
-                var sendData = {};
-                var jsonData = {};
-                sendData.url = "/index.php/pc/Order/ruku_list";
-                jsonData.page = 1;
-                jsonData.type = $('#select').val();
-                jsonData.start = $('#ECalendar_case1').val();
-                jsonData.end = $('#ECalendar_case2').val();
-                jsonData.supply_name = $('#supply').val();
-                jsonData.worker_name = $('#worker').val();
-                jsonData.group_name = $('#group').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){

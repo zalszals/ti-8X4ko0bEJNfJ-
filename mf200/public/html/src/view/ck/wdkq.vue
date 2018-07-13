@@ -6,7 +6,7 @@
                 <h4  class="tit">我的考勤</h4>
             </div>
             <div class="case">
-               <select class="vuesela select ppp" name="addcat_id" id="select">
+               <select class="vuesela select ppp" name="addcat_id" id="select" @change="change()">
 					<option value="1">本月</option>
   					<option value="2">上月</option>			
 				</select>
@@ -16,7 +16,7 @@
                 <div class="calendarWarp" style="">
                     <input type="text" name="date" class='ECalendar input' id="ECalendar_case2" placeholder="请选择结束时间"/>
                 </div>
-                <button v-on:click="search()" class="button or ppp" >筛选</button>
+                <button v-on:click="getlist(1)" class="button or ppp" >筛选</button>
             </div>
         </div>
     </div>
@@ -108,25 +108,29 @@
                 var jsonData = {};
                 sendData.url = "/index.php/pc/WorkerRecord/record_list";
                 jsonData.page = page;
-                jsonData.class_type = 2;
+				jsonData.class_type = 2;
+				jsonData.start_time = $('#ECalendar_case1').val();
+                jsonData.end_time = $('#ECalendar_case2').val();
+                jsonData.type = $('#select').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
 					this.data = re.data;
 					this.pages = re.total.pages;
 					this.page = re.total.page;
+					this.start = $('#ECalendar_case1').val();
+                    this.end = $('#ECalendar_case2').val();
+                    this.type = $('#select').val();
 				}else{
                     layer.msg(re.msg); 
                 }
 			},
-			search(){
+			change(){
                 var sendData = {};
                 var jsonData = {};
                 sendData.url = "/index.php/pc/WorkerRecord/record_list";
                 jsonData.page = 1;
                 jsonData.class_type = 2;
-                jsonData.start_time = $('#ECalendar_case1').val();
-                jsonData.end_time = $('#ECalendar_case2').val();
                 jsonData.type = $('#select').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);

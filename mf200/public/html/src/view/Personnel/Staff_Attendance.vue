@@ -6,7 +6,7 @@
 				<h4 class="tit">员工考勤</h4>
 			</div>
 			<div class="case">
-				<select id="select">
+				<select id="select" @change="change">
   					<option value="1">本月</option>
   					<option value="2">上月</option>
 				</select>
@@ -19,7 +19,7 @@
 				<input id="name" type="text" class="ECalendar calendarWarp" placeholder="请输入员工姓名"/>
 				<input id="group" type="text" class="ECalendar calendarWarp" placeholder="请输入部门姓名"/>
 				<input id="role" type="text" class="ECalendar calendarWarp" placeholder="请输入职务姓名"/>
-				<button @click="search()">搜索</button>
+				<button @click="getlist(1)">搜索</button>
 				<button @click="set()">设置</button>
 			</div>
 		</div>
@@ -249,28 +249,32 @@
                 var jsonData = {};
                 sendData.url = "/index.php/pc/WorkerRecord/record_list";
                 jsonData.page = page;
-                jsonData.class_type = 1;
+				jsonData.class_type = 1;
+				jsonData.worker_name = $('#name').val();
+                jsonData.role_name = $('#role').val();
+                jsonData.group_name = $('#group').val();
+                jsonData.start_time = $('#ECalendar_case1').val();
+                jsonData.end_time = $('#ECalendar_case2').val();
+                jsonData.type = $('#select').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
 					this.data = re.data;
 					this.pages = re.total.pages;
 					this.page = re.total.page;
+					this.start = $('#ECalendar_case1').val();
+                    this.end = $('#ECalendar_case2').val();
+                    this.type = $('#select').val();
 				}else{
                     layer.msg(re.msg); 
                 }
             },
-            search(){
+            change(){
                 var sendData = {};
                 var jsonData = {};
                 sendData.url = "/index.php/pc/WorkerRecord/record_list";
                 jsonData.page = 1;
                 jsonData.class_type = 1;
-                jsonData.worker_name = $('#name').val();
-                jsonData.role_name = $('#role').val();
-                jsonData.group_name = $('#group').val();
-                jsonData.start_time = $('#ECalendar_case1').val();
-                jsonData.end_time = $('#ECalendar_case2').val();
                 jsonData.type = $('#select').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);

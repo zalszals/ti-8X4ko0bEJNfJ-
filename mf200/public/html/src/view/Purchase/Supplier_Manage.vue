@@ -12,7 +12,7 @@
                     <option v-for="(item,index) in pro" :key="index" v-bind:value="index+1">{{item}}</option>
                 </select>
                 <input type="text" name="date" class='ECalendar input' placeholder="请输入供应商名称"  id="no"/>
-                <button class="button or" @click="search()">搜索</button>
+                <button class="button or" @click="getlist(1)">搜索</button>
                 <button class="button or" @click="add()">添加</button>
             </div>
         </div>
@@ -157,6 +157,10 @@
                 var jsonData = {};
                 sendData.url = "/index.php/pc/Supply/supply_list";
                 jsonData.page = page;
+                jsonData.supply_name = $('#no').val();
+                if($('#select').val() != 0){
+                    jsonData.province =  $('#select').find('option:selected').text();
+                }
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
@@ -174,26 +178,6 @@
                 sendData.url = "/index.php/pc/Supply/supply_list";
                 jsonData.page = 1;
                 if($('#select').val() != 0){
-                    jsonData.province =  $('#select').find('option:selected').text();
-                }
-                sendData.data = jsonData;
-                var re = getFaceInfo(sendData);
-                if(re.status == 1){
-                    this.data = re.data;
-                    this.pro = re.pro;
-					this.pages = re.total.pages;
-					this.page = re.total.page;
-                }else{
-                    layer.msg(re.msg);
-                }
-            },
-            search(){
-                var sendData = {};
-                var jsonData = {};
-                sendData.url = "/index.php/pc/Supply/supply_list";
-                jsonData.page = 1;
-                jsonData.supply_name = $('#no').val();
-                 if($('#select').val() != 0){
                     jsonData.province =  $('#select').find('option:selected').text();
                 }
                 sendData.data = jsonData;

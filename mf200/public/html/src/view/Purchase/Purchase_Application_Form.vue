@@ -19,7 +19,7 @@
                 </div>
                 <input type="text" name="date" class='ECalendar input' placeholder="请输入申请单编号" id="no" />
                 <input type="text" name="date" class='ECalendar input' placeholder="请输入申请人名称" id="name" />
-                <button @click="search()" class="button or">筛选</button>
+                <button @click="getlist(1)" class="button or">筛选</button>
                 <button @click="add()" class="button or">添加</button>
             </div>
         </div>
@@ -157,7 +157,11 @@
                 var jsonData = {};
                 sendData.url = "/index.php/pc/Apply/apply";
                 jsonData.page = page;
-                jsonData.type = 1;
+                jsonData.type = $('#selected').val();
+                jsonData.start = $('#ECalendar_case1').val();
+                jsonData.end = $('#ECalendar_case2').val();
+                jsonData.worker_name = $('#name').val();
+                jsonData.sn = $('#no').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
@@ -174,26 +178,6 @@
                 sendData.url = "/index.php/pc/Apply/apply";
                 jsonData.page = 1;
                 jsonData.type = $('#selected').val();
-                sendData.data = jsonData;
-                var re = getFaceInfo(sendData);
-                if(re.status == 1){
-                    this.list = re.data;
-					this.pages = re.total.pages;
-					this.page = re.total.page;
-                }else{
-                    layer.msg(re.msg);
-                }
-            },
-            search(){
-                var sendData = {};
-                var jsonData = {};
-                sendData.url = "/index.php/pc/Apply/apply";
-                jsonData.page = 1;
-                jsonData.type = $('#selected').val();
-                jsonData.start = $('#ECalendar_case1').val();
-                jsonData.end = $('#ECalendar_case2').val();
-                jsonData.worker_name = $('#name').val();
-                jsonData.sn = $('#no').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){

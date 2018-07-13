@@ -13,7 +13,7 @@
         <div class="fc-fff pad0 f16" style="padding-top:18px;overflow:hidden;">
 			<span class="mr35"><router-link to="router_main_Production_Management_System">生产管理</router-link></span>
 			<span class="mr35"><router-link to="/router_main_Inventory_System">仓库管理</router-link></span>
-			<span class="mr35"><router-link to="/materialmanagement">采购管理</router-link></span>
+			<span class="mr35"><router-link to="router_main_Purchase_System">采购管理</router-link></span>
 			<span class="mr35"><router-link to="/router_main_Sell_System">销售管理</router-link></span>
             <span class="mr35"><router-link to="/router_main_Finance_System">财务管理</router-link></span>
             <span class="mr35"><router-link to="/router_main_Personnel_System">人事管理</router-link></span>
@@ -50,14 +50,14 @@
 	import right from '@/components/public/right'
 	export default {
 		name: 'top',
-		data:function(){
-            return{
-                worker_name: localStorage.getItem('worker_name'),
-                role_name: localStorage.getItem('role_name'),
-                role_id: localStorage.getItem('role_id')
-            }
-        },
-		components:{
+		data: function() {
+			return {
+				worker_name: localStorage.getItem('worker_name'),
+				role_name: localStorage.getItem('role_name'),
+				role_id: localStorage.getItem('role_id')
+			}
+		},
+		components: {
 			right
 		}
 	}
@@ -65,4 +65,6 @@
 </script>
 
 <style>
+
+
 </style>

@@ -1,6 +1,6 @@
 <!--申请采购单 不通过 编辑-->
 <template>
-<div id="Application_Form_main__">
+<div class="clear" id="left-box">
     <div id="Application_Form_head_">
         <div id="Application_Form_Date_">
             <div id="w_Warehouse">
@@ -24,45 +24,51 @@
             <button v-on:click="add_div" class="button or">+&nbsp;&nbsp;添加</button>
         </div>
         <div class="block" v-for='(list,index) in lists' :key="index">
-                <img src="lib/img/public/cropmode/add-new-del.png" alt="" v-on:click="lists.splice(index, 1)">
-                <ul>                 
-                    <li>
-                        <p>物料分类 ：{{list.wlfl}}</p>
-                    </li>                    
-                    <li>
-                        <p>物料名称 ：{{list.wlmc}}</p>
-                    </li>                
-                    <li>
-                        <p>物料编号 ： {{list.wlbh}}</p>
-                    </li>                      
-                     <li>
-                        <p>物料规格 : {{list.wlgg}}</p>
-                    </li>
-                    <li>
-                        <p>
-                            申请数量 ：<input type="text" v-bind:value="list.wlsl" :id="'wlsl'+index" class="input"> {{list.wldw}}
-                        </p>
-                    </li>
-                </ul>
+            <img src="lib/img/public/cropmode/add-new-del.png" alt="" v-on:click="lists.splice(index, 1)">
+			<ul>                 
+				<li>
+					<p>物料分类 ：{{list.wlfl}}</p>
+				</li>                    
+				<li>
+					<p>物料名称 ：{{list.wlmc}}</p>
+				</li>                
+				<li>
+					<p>物料编号 ： {{list.wlbh}}</p>
+				</li>                      
+					<li>
+					<p>物料规格 : {{list.wlgg}}</p>
+				</li>
+				<li>
+					<p>
+						申请数量 ：<input type="text" v-bind:value="list.wlsl" :id="'wlsl'+index" class="input"> {{list.wldw}}
+					</p>
+				</li>
+			</ul>
         </div>
-         <div id="opendiv">
-           <div>
-           	            <p class='line'>添&ensp;加&ensp;物&ensp;料</p>
-            <p class="line-input">类别&nbsp;&nbsp;
-                <select id='cate' @change="change()" class="select">
-                    <option value='0'>请选择类别名称</option>
-                    <option v-bind:value='item.cat_id' v-for="(item,index) in list.cate" :key="index">{{item.cat_name}}</option>
-                </select>
-                <span>物料&nbsp;&nbsp;</span><select id='mate' @change="change_mate()" class="select">
-                    <option value='0'>请选择物料名称</option>
-                    <option v-bind:value='item.m_id' v-for="(item,index) in mate" :key="index">{{item.m_name}}</option>
-                </select>
-            </p>
-            <p class="line-input">编号：<font v-if="wuliao.m_no" id="no">{{wuliao.m_no}}</font><font v-else id="no">————</font><span>规格：</span><font v-if="wuliao.m_desc" id="desc">{{wuliao.m_desc}}</font><font v-else id="desc">————</font></p>
-            <p class="line-input">数量&nbsp;&nbsp;<input type="text" name="num" id="num" placeholder="请输入数量" class="input"><span>单位&nbsp;&nbsp;</span><input type="text" name="unit" id="unit" v-bind:value="wuliao.unit" class="input"></p>
-           </div>
-
-        </div>
+		<div style="clear:both;"></div>
+        
+		<ul>
+			<li class="h40">添&ensp;加&ensp;物&ensp;料</li>
+			<li class="h40">类别&nbsp;&nbsp;
+				<select id="cate" @change="change()" class="select">
+					<option value="0">请选择类别名称</option>
+					<option v-bind:value='item.cat_id' v-for="(item,index) in list.cate" :key="index">{{item.cat_name}}</option>
+				</select>
+				<span>物料&nbsp;&nbsp;</span><select id='mate' @change="change_mate()" class="select">
+					<option value="0">请选择物料名称</option>
+					<option v-bind:value='item.m_id' v-for="(item,index) in mate" :key="index">{{item.m_name}}</option>
+				</select>
+			</li>
+			<li class="h40">
+				编号：<font v-if="wuliao.m_no" id="no">{{wuliao.m_no}}</font>
+				<font v-else id="no">————</font>
+				<span>规格：</span>
+				<font v-if="wuliao.m_desc" id="desc">{{wuliao.m_desc}}</font>
+				<font v-else id="desc">————</font>
+			</li>
+			<li class="h40">数量&nbsp;&nbsp;<input type="text" name="num" id="num" placeholder="请输入数量" class="input"><span>单位&nbsp;&nbsp;</span><input type="text" name="unit" id="unit" v-bind:value="wuliao.unit" class="input"></li>
+		</ul>
+        
     </div>
 </div>
 </template>
@@ -230,13 +236,26 @@
 
 </script>
 <style scoped>
+	#opendiv {
+		display: none1;
+	}
+	#opendiv div{
+		margin-left: 40px;
+	}
+	#opendiv p span {
+		margin-left: 30px;
+	}
+
+	#opendiv p font {
+		padding-right: 83px;
+	}
+
 	#Application_Form_head_ {
 		border-bottom: 2px solid #EAEEF1;
-		margin-left: 40px;
+		/* margin-left: 40px; */
 		padding-bottom: -110px;
 		height: 80px;
 	}
-
 	#w_Warehouse {
 		font-size: 15px;
 		font-weight: bold !important;
@@ -284,9 +303,6 @@
 	#center_ button {
 		margin-top: 10px;
 	}
-
-</style>
-<style>
 	.block {
 		float: left;
 		margin-top: 30px;
@@ -329,7 +345,7 @@
 
 	.line-input {
 		margin-top: 25px;
-		height: 25px;
+		/* height: 25px; */
 		line-height: 25px;
 	}
 
@@ -368,46 +384,4 @@
 		background-color: #F4A356;
 		margin-right: 40px
 	}
-
-	body .myclass {
-		border-radius: 10px;
-		/*		text-align: center*/
-	}
-
-	body .myclass .layui-layer-btn {
-		height: 80px
-	}
-
-	body .myclass .layui-layer-btn {
-		text-align: center
-	}
-
-	body .myclass .layui-layer-btn .layui-layer-btn0 {
-		background-color: #b0c777;
-		border: 1px solid #fff;
-		padding: 0px 28px;
-		border-radius: 15px;
-		margin-right: 20px
-	}
-
-	body .myclass .layui-layer-btn .layui-layer-btn1 {
-		border: 1px solid #f1f1f1;
-		padding: 0px 28px;
-		border-radius: 15px
-	}
-	
-	#opendiv {
-		display: none
-	}
-	#opendiv div{
-		margin-left: 40px;
-	}
-	#opendiv p span {
-		margin-left: 30px;
-	}
-
-	#opendiv p font {
-		padding-right: 83px;
-	}
-
 </style>

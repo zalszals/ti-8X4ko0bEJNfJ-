@@ -20,7 +20,7 @@
                 </div>
                 <input type="text" name="date" class='ECalendar input' placeholder="请输入退料单编号"  id="no"/>
                 <input type="text" name="date" class='ECalendar input' placeholder="请输入供应商名称" id="supply"/>
-                <button @click="search" class="button or">搜索</button>
+                <button @click="getlist(1)" class="button or">搜索</button>
                 <button @click="add()" class="button or">添加</button>
             </div>
         </div>
@@ -180,6 +180,10 @@
                 jsonData.page = page;
                 jsonData.style = 2;
                 jsonData.type = $('#select').val();
+                jsonData.sn = $('#no').val();
+                jsonData.start = $('#ECalendar_case1').val();
+                jsonData.end = $('#ECalendar_case2').val();
+                jsonData.supply_name = $('#supply').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){
@@ -197,27 +201,6 @@
                 jsonData.page = 1;
                 jsonData.style = 2;
                 jsonData.type = $('#select').val();
-                sendData.data = jsonData;
-                var re = getFaceInfo(sendData);
-                if(re.status == 1){
-                    this.data = re.data;
-					this.pages = re.total.pages;
-					this.page = re.total.page;
-                }else{
-                    layer.msg(re.msg);
-                }
-            },
-            search(){
-                var sendData = {};
-                var jsonData = {};
-                sendData.url = "/index.php/pc/Order/order_list";
-                jsonData.page = 1;
-                jsonData.style = 2;
-                jsonData.type = $('#select').val();
-                jsonData.sn = $('#no').val();
-                jsonData.start = $('#ECalendar_case1').val();
-                jsonData.end = $('#ECalendar_case2').val();
-                jsonData.supply_name = $('#supply').val();
                 sendData.data = jsonData;
                 var re = getFaceInfo(sendData);
                 if(re.status == 1){

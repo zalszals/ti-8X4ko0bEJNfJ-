@@ -13,7 +13,7 @@
             -->
            <ul class="right wb70 clear">
                 <li class="left w100">
-                    <select class="form-control w100" id="groupselect" @change="change()">
+                    <select class="form-control w100" id="groupselect" @change="getlist(1,1)">
                         <option value="0">未打卡</option>
                         <option value="1">进行中</option>
                         <option value="2">待核查</option>
@@ -33,7 +33,7 @@
                     <input id="worker" class="form-control w160" style="" placeholder="请输入姓名" />
                 </li>    
                 <li class="left w80">
-                    <span class="rightspana" @click="search()">筛选</span> 
+                    <span class="rightspana" @click="getlist(1,2)">筛选</span> 
                 </li>               
            </ul>
         </div>
@@ -71,7 +71,7 @@
         </div>
         <div id="page_new" class="paing">
 			<ul class="pages" v-if="pages > 1">
-				<li @click="getlist(item)" v-for="(item,index) in pages" :key="index" :class="page==item?'page_click':''">{{item}}</li>
+				<li @click="getlist(item,state)" v-for="(item,index) in pages" :key="index" :class="page==item?'page_click':''">{{item}}</li>
 			</ul>
 		</div>
     </div>
@@ -116,56 +116,31 @@ export default {
             item:[],
             pages:'',
             page:'',
+            state:1
         }
     },
     mounted:function(){
-        this.getlist(1);
+        this.getlist(1,1);
     },
     methods: {
-        getlist(page){
+        getlist(page,state){
             var sendData = {};
             var jsonData = {};
             sendData.url = "/index.php/pc/WorkerOrder/gd_check_list";
             jsonData.type = $('#groupselect').val();
             jsonData.page = page;
+            if(state == 2){
+                this.state = 2;
+                jsonData.type = $('#groupselect').val();
+                jsonData.start = $('#start').val();
+                jsonData.end = $('#end').val();
+                jsonData.worker = $('#worker').val();  
+            }else{
+                this.state = 1;
+            }
             sendData.data = jsonData;
             var re = getFaceInfo(sendData);
             if(re.status == 1){
-                this.data = re.data;
-                this.pages = re.total.pages;
-				this.page = re.total.page;
-            }else{
-               layer.msg(re.msg); 
-            }
-        },
-        change(){
-            var sendData = {};
-            var jsonData = {};
-            sendData.url = "/index.php/pc/WorkerOrder/gd_check_list";
-            jsonData.type = $('#groupselect').val();
-            jsonData.page = 1;
-            sendData.data = jsonData;
-            var re = getFaceInfo(sendData);
-             if(re.status == 1){
-                this.data = re.data;
-                this.pages = re.total.pages;
-				this.page = re.total.page;
-            }else{
-               layer.msg(re.msg); 
-            }
-        },
-        search(){
-            var sendData = {};
-            var jsonData = {};
-            sendData.url = "/index.php/pc/WorkerOrder/gd_check_list";
-            jsonData.type = $('#groupselect').val();
-            jsonData.start = $('#start').val();
-            jsonData.end = $('#end').val();
-            jsonData.worker = $('#worker').val();
-            jsonData.page = 1;
-            sendData.data = jsonData;
-            var re = getFaceInfo(sendData);
-             if(re.status == 1){
                 this.data = re.data;
                 this.pages = re.total.pages;
 				this.page = re.total.page;

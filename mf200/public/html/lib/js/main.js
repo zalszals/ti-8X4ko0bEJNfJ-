@@ -232,7 +232,7 @@ function getFaceInfo(sendData){
 
 
  
-  token = localStorage.getItem("mf_token") ? localStorage.getItem("mf_token") : '6b559o6fuhh1o2nvttgj0ov003';   
+  token = localStorage.getItem("mf_token") ? localStorage.getItem("mf_token") : 'nu6if5jteniqnbdqc9on7c0120';   
   phone = localStorage.getItem("mf_account") ? localStorage.getItem("mf_account") : '18114158893';
  
  

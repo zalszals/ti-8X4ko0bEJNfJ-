@@ -4,7 +4,7 @@
         <ul> 
             <li>            
                 <router-link to="router_main_Production_Management_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Production_Management_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">生产管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -13,7 +13,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Purchase_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Purchase_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">采购管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -22,7 +22,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Sell_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Sell_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">销售管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -31,7 +31,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Inventory_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Inventory_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">库存管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -40,7 +40,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Finance_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Finance_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">财务管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -49,7 +49,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Personnel_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Personnel_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">人事管理</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。
@@ -67,7 +67,7 @@
             </li>
             <li>            
                 <router-link to="router_main_Base_System">
-                    <img src="/lib/img/public/cropmode/z8.png" style="margin-top:30px;" />
+                    <img src="/lib/img/public/System_Icon/Set_System.png" style="margin-top:30px;" />
                     <h4 style="line-height:60px;">基础设置</h4>
                     <p style="padding:0 30px; line-height:24px;">
                         生产计划的列表，发布。

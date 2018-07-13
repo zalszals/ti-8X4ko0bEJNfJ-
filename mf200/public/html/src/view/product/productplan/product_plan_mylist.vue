@@ -4,7 +4,7 @@
 
         <Div class="newdivtop">
             <h4 style="font-weight:bold;">生产计划&nbsp;&nbsp;<span class="h4spana">|&nbsp;&nbsp;生产计划详情</span>&nbsp;&nbsp;<span class="h4spana">|&nbsp;&nbsp;我的任务</span>
-                <span class="h4span-r" style="background-color:#b0c777;">返 回</span>
+                <span class="h4span-r" style="background-color:#b0c777;" @click="$router.back(-1)">返 回</span>
             </h4>
         </Div>
         

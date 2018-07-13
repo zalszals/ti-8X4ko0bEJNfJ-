@@ -4,14 +4,14 @@
         <div class="newdivtop"> 
             <p class="bold left"><font class="s1">种植管理&nbsp;&nbsp;</font><font class="s2">|&nbsp;&nbsp;生产计划</font></p>
             <div class="right">
-                <select id="select" class="bold" @change="change()">
+                <select id="select" class="bold" @change="getinfo(1,1)">
                     <option value="1">进行中</option>
                     <option value="2">已完成</option>
                 </select>
                 <input type="text" placeholder=" 请选择开始时间" id="start"/><font class="bold">至 </font> 
                 <input type="text" placeholder=" 请选择结束时间" id="end"/>
                 <input type="text" placeholder=" 请输入作物或品种名称" id="cat_name"/>
-                <button @click="search()"><img src="/lib/img/public/System_Icon/search.png" class="img">搜 索</button>
+                <button @click="getinfo(1,2)"><img src="/lib/img/public/System_Icon/search.png" class="img">搜 索</button>
                 <button class="c button or" @click="fabu()">发布生产计划</button>
                 <button @click="$router.back(-1)">返 回</button>
             </div>
@@ -47,7 +47,7 @@
         </div>
         <div id="page_new" class="paing">
             <ul class="pages" v-if="pages > 1">
-                <li @click="getinfo(item)" v-for="(item,index) in pages" :key="index" :class="page==item?'page_click':''">{{item}}</li>
+                <li @click="getinfo(item,state)" v-for="(item,index) in pages" :key="index" :class="page==item?'page_click':''">{{item}}</li>
             </ul>
 		</div>
     </div>
@@ -56,9 +56,9 @@
 
 <script>
 export default {
-  data(){ return{ planall:[],pages:'',page:'',val:''} },
+  data(){ return{ planall:[],pages:'',page:'',val:'',state:1} },
   mounted:function(){
-        this.getinfo(1);
+        this.getinfo(1,1);
         laydate.render({
             elem: '#start',
             showBottom: false,
@@ -71,7 +71,7 @@ export default {
         });
   },
   methods:{
-      getinfo:function(page){
+      getinfo:function(page,state){
 
         var sendData = {};
         var jsonData = {};
@@ -80,6 +80,14 @@ export default {
         
         jsonData.type = $('#select').val();
         jsonData.page = page;
+        if(state == 2){
+            this.state = 2;
+            jsonData.cat_name = $("#cat_name").val();
+            jsonData.s_time = $("#start").val();
+            jsonData.e_time = $("#end").val();
+        }else{
+            this.state = 1;
+        }
         sendData.data = jsonData;
         var re = getFaceInfo(sendData);
         if(re.status ==1){
@@ -90,39 +98,6 @@ export default {
       },
       fabu(){
           window.location.href = "#/product/productplan/pro_plan_add";
-      },
-      change(){
-        var sendData = {};
-        var jsonData = {};
-        
-        sendData.url ="index.php/pc/ProductPlan/product_list";
-        
-        jsonData.type = $('#select').val();
-        jsonData.page = 1;
-        sendData.data = jsonData;
-        var re = getFaceInfo(sendData);
-        if(re.status ==1){
-            this.planall=re.data;
-            this.pages = re.total.pages;
-			this.page = re.total.page;
-        } 
-      },
-      search(){
-        var sendData = {};
-        var jsonData = {};
-        sendData.url = "index.php/pc/ProductPlan/product_list";
-        jsonData.type = $('#select').val();
-        jsonData.page = 1;
-        jsonData.cat_name = $("#cat_name").val();
-        jsonData.s_time = $("#start").val();
-        jsonData.e_time = $("#end").val();
-        sendData.data = jsonData;
-        var re = getFaceInfo(sendData);
-        if(re.status == 1){
-            this.planall = re.data;
-            this.pages = re.total.pages;
-            this.page = re.total.page;
-        }
       },
       del(plan_id) {
             var val = layer.confirm("确认删除", {

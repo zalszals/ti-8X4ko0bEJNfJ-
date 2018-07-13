@@ -15,7 +15,7 @@
 			<span class="mr35"><router-link to="/router_main_Purchase_System/Purchase_Order">采购订单</router-link></span>
 			<span class="mr35"><router-link to="/router_main_Purchase_System/Purchase_Return_From">采购退料单</router-link></span>
 			<span class="mr35"><router-link to="/router_main_Purchase_System/Purchase_In_From">采购入库单</router-link></span>
-			<span class="mr35"><router-link to="/worker/production/production_sum">供应商管理</router-link></span>			
+			<span class="mr35"><router-link to="/router_main_Purchase_System/Supplier_Manage">供应商管理</router-link></span>			
        		<span class="mr35"><router-link to="/router_main_Personnel_System/Staff_Attendance">采购报表</router-link></span>       		
        		<span class="mr35"><router-link to="/router_main_Personnel_System/Staff_Attendance"></router-link></span>
         </div>

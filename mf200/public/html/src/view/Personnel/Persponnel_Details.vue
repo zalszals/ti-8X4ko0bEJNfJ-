@@ -22,7 +22,7 @@
 			<li id="litwo" class="rs">
 				<p>考勤时间</p>
 			</li>
-			<li v-bind:class="oddeven(index)?'ws':'rs'" class="ws" v-for="(item,index) in time" :key="index"><p>{{item}}</p></li>
+			<li v-bind:class="oddeven(index)?'ws':'rs'" class="ws" v-for="(item,index) in time" :key="index"><p v-if="item.s_time">{{item.s_time}} - {{item.e_time}}</p><p v-else>{{item}}</P></li>
 		</ul>
 	</div>
 	</div>

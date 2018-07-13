@@ -179,8 +179,8 @@
             <!--right-->
             <div class="plandivaddright">
     
-                    <h4 class="rightzh">选择生产计划</h4>
-                    <select class="rightzhspan"  v-on:change="gettask($event.target)">
+                    <h4 class="rightzh" id="plan">选择生产计划</h4>
+                    <select class="rightzhspan"  v-on:change="gettask($event.target)" id="planselect">
                         <option>请选择生产计划</option>
                         <option style="color:#666;" v-for="plist in planall" v-bind:value="plist.plan_id">{{plist.plan_name}}</option>
                     </select>
@@ -289,10 +289,26 @@ export default {
     getplan:function(){
         var sendData = {};
         var jsonData = {};
-        sendData.url="index.php/product/ProTake/plan_list";
+        sendData.url="index.php/pc/Work/plan_list";
         sendData.data = jsonData;
         var re = getFaceInfo(sendData);
-        this.planall=re.data;
+        console.log(re);
+        if(re.status == 1){
+            if(re.state == 1){
+                 this.planall=re.data;
+            }else{
+                $('#plan').hide();
+                $('#planselect').hide();
+                this.taskall=re.data;
+                var arr=re.data;
+                for(var i=0;i<arr.length;i++){
+                    this.areaall=arr[i]['area'];
+                    this.workerid=arr[i]['worker_id'];
+                    //this.areaall.push(arr[i]['area']);
+                }
+                $("#zzhide").fadeIn(2000).removeClass("hide"); 
+            }
+        }
         //console.log(this.planall);
     },
 
@@ -318,7 +334,6 @@ export default {
         sendData.data = jsonData;
         var re = getFaceInfo(sendData);
         this.taskall=re.data;
-        console.log(this.taskall);
         var arr=re.data;
         for(var i=0;i<arr.length;i++){
             this.areaall=arr[i]['area'];
