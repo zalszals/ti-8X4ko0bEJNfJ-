@@ -68,19 +68,21 @@
 					</tr>
 				</table>
 				</a>
-			</div>
+			</div>		
+		</div>
 		<div id="page_new" class="paing">
 			<ul class="pages" v-if="pages > 1">
-				<li @click="getlists(item)" v-for="(item,index) in pages" :key="index" :class="page==item?'page_click':''">{{item}}</li>
+				<li @click="getlists(truepage-1)">上一页</li>
+				<template v-for="(item,index) in 10">
+					<template v-if="Math.floor((truepage-1)/10)*10+item <= pages">					
+					<li :key="index" @click="getlists(Math.floor((truepage-1)/10)*10+item)" :class="truepage%10 == item || truepage%10 == 0 && item == 10 ? 'or' : ''" >
+					{{Math.floor((truepage-1)/10)*10+item}}
+					</li>						
+					</template>						
+				</template>
+				<li @click="getlists(truepage+1)">下一页</li>
 			</ul>
-			
-		
 		</div>
-			
-
-
-		</div>
-
 	</div>
 </div>
 </template>
@@ -96,7 +98,13 @@
 			};
 		},
 		mounted:function(){
-			this.getlists()
+			this.getlists();
+			laydate.render({
+				elem: '#ECalendar_case1' //指定元素
+			});				
+			laydate.render({
+				elem: '#ECalendar_case2' //指定元素
+			});
 	 	},
 
 		methods:{

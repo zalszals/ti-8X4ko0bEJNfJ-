@@ -81,21 +81,21 @@
 				
 							<div class="a1input">
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px;  width:60px; text-align:left;">物料名称</label>
-								<input type="text" class="form-control" style="width:25%;"  name="addm_name" placeholder="请输入物料名称">
+								<input type="text" class="add_form form-control" style="width:25%;" name="addm_name" placeholder="请输入物料名称">
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px; width:60px; text-align:left;"></label>
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px;  width:60px; text-align:left;">物料编号</label>
-								<input type="text" class="form-control" style="width:25%;"  name="addm_no" placeholder="请输入物料编号">
+								<input type="text" class="add_form form-control" style="width:25%;" name="addm_no" placeholder="请输入物料编号">
 							</div>
 							<div class="a1input">
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px;  width:60px; text-align:left;">单价</label>
-								<input type="text" class="form-control" style="width:25%;"  name="addprice" placeholder="请输入单价">
+								<input type="text" class="add_form form-control" style="width:25%;"  name="addprice" placeholder="请输入单价">
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px; width:60px;text-align:left; text-indent:8px;" >元</label>
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px; width:60px; text-align:left;">单位</label>
-								<input type="text" class="form-control" style="width:25%;"  name="addunit" placeholder="请输入单位">
+								<input type="text" class="add_form form-control" style="width:25%;"  name="addunit" placeholder="请输入单位">
 							</div>
 							<div class="a1input">
 								<label class="control-label" style=" float:left; display:inline; margin-right:8px; width:60px; text-align:left;">规格</label>
-								<input type="text" class="form-control" style="width:72%;"  name="addm_desc" placeholder="请输入规格">
+								<input type="text" class="add_form form-control" style="width:72%;"  name="addm_desc" placeholder="请输入规格">
 							</div>
 					
 				</form>
@@ -142,8 +142,9 @@
 			</div>
 			<div class="layer-add-form-bottom">
 				<span style="padding:10px 12px; font-weight:bold; float:left;display:inline;">编辑物料</span>
-				<span v-on:click="doEdit" style="padding:10px 12px; float:right;display:inline;cursor:pointer;font-weight:bold;color:#f2a652;cursor:pointer;"><img src="/../lib/img/public/cropmode/litterdh.jpg" style="margin-right:6px;">完成</span>
-				
+				<span v-on:click="doEdit" style="padding:10px 12px; float:right;display:inline;cursor:pointer;font-weight:bold;color:#f2a652;cursor:pointer;">
+          <img src="/../lib/img/public/cropmode/litterdh.jpg" style="margin-right:6px;">完成
+        </span>				
 			</div>
 		</div>
 		<!--addForm editForm-->
@@ -205,8 +206,8 @@ export default {
     addForm() {
       layer.open({
         type: 1,
-        title: false,
-        area: ["800px", "410px"],
+        title: '添加物料',
+        area: ["800px", "452px"],
         closeBtn: 1,
         shadeClose: false,
         skin: "layer-add-form",
@@ -214,7 +215,6 @@ export default {
       });
     },
     doAdd() {
-
       var addcat_id = $("select[name='addcat_id']").val();
       if(addcat_id==''){
         layer.msg("请选择类别");return;
@@ -261,13 +261,16 @@ export default {
       sendData.data = jsonData;
      
       var re = getFaceInfo(sendData);
+      var oveObj = this;
       if (re.status == 1) {
-          layer.msg(re.msg, { time: 2000 },function(){
-            window.location.reload();
+          layer.msg(re.msg, { time: 1500 },function(){
+            layer.closeAll();
+            $('.add_form').val('');
+            oveObj.getnews();
+            oveObj.getlists();
           });
       } else {
-          layer.msg(re.msg, { time: 2000 }, function(){
-          });
+          layer.msg(re.msg);
       }
     },
 
@@ -314,13 +317,15 @@ export default {
       sendData.data=jsonData;
 
       var re = getFaceInfo(sendData);
+      var oveObj = this;
       if (re.status == 1) {
-            layer.msg(re.msg,{time:800},function(){
-               window.location.reload();
+            layer.msg(re.msg,{time:1500},function(){
+              layer.closeAll();              
+              oveObj.getnews();
+              oveObj.getlists();
             });
       } else {
-            layer.msg(re.msg,{time:800},function(){
-            });
+            layer.msg(re.msg);
       }
     },
     editForm(editcatid, editmid) {
@@ -328,8 +333,8 @@ export default {
       this.mid = editmid,
         layer.open({
           type: 1,
-          title: false,
-          area: ["800px", "410px"],
+          title: '编辑物料',
+          area: ["800px", "452px"],
           closeBtn: 1,
           shadeClose: false,
           skin: "layer-add-form",

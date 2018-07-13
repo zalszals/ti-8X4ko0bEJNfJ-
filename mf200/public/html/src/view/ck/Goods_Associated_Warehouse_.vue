@@ -1,9 +1,9 @@
 <template>
-<div id="Application_Form_main__">
+<div id="left-box">
     <div id="Application_Form_head_">
         <div id="Application_Form_Date_">
             <div id="w_Warehouse">
-                <h4  class="tit">物料关联仓库</h4>
+                <h4 class="tit">物料关联仓库</h4>
             </div>
             <div class="case">
                 <button class="button or ppp" @click="t(1)">+添加仓库</button>
@@ -12,25 +12,24 @@
         </div>
     </div>
     <div id="Application_Form_main_">
-    <table>
+    <table class="wb100">
         <tr>
-            <th >删除</th>
-            <th >仓库</th>
-            <th >物料分类</th>
-            <th >操作</th>
+            <th style="width:10%">删除</th>
+            <th style="width:25%">仓库</th>
+            <th style="width:45%">物料分类</th>
+            <th style="width:20%">操作</th>
         </tr>
         <tr class="w_color" v-for="item in mange_info">
-            <td   @click="DelCkRelation(item.ck_id)"><img src="\lib\img\public\cropmode\z-add-del.jpg" alt=""></td>
-            <td class="bbb" ><p >{{item.ck_name}}</p><button class="button or ppp" @click="ShowAdd(item.ck_id)"><img src="" alt="" >添加</button>
+            <td @click="DelCkRelation(item.ck_id)"><img src="\lib\img\public\cropmode\z-add-del.jpg" alt=""></td>
+            <td class="bbb" >
+				<p>{{item.ck_name}}</p>
+				<button class="button or" @click="ShowAdd(item.ck_id)"><img src="" alt="" >添加</button>
 			</td>
-            <td colspan="2">
-                <table>
-                    <tr class="color" v-for="items in item.cate_info">
-                        <td >{{items.cat_name}}</td>
-                        <td ><button class="button or" @click="ResetRelation(item.ck_id,items.cat_id)">取消关联</button></td>
-                    </tr>
-
-                </table>
+            <td colspan="2" class="nopadding">
+                <ul class="clear nei_ul" v-for="(items,index) in item.cate_info" :key="index">
+                    <li class="wb70 left h45 lh45">{{items.cat_name}}</li>
+					<li class="wb30 left h45 lh45"><span class="button or cursor" @click="ResetRelation(item.ck_id,items.cat_id)">取消关联</span></li>                    
+                </ul>
             </td>
         </tr>        
  
@@ -38,14 +37,18 @@
 </div>
 
 <div id="add_show" style="display:none">
-	<input type="hidden" id="hide_ckid">
-	请选择物料:
-	<select id="change_cat">
-	<option value="">请选择</option>
-	<option v-for="item in add_info" v-bind:value="item.cat_id">{{item.cat_name}}</option>
-	</select>
-	<button @click="ComitCatinfo()">提交</button>
-	<button @click="HideDiv()">取消</button>
+	<div style="margin:40px 0 0 72px;">
+		<input type="hidden" id="hide_ckid">
+		请选择分类:
+		<select class="w160 input-control" id="change_cat">
+		<option value="">请选择</option>
+		<option v-for="item in add_info" v-bind:value="item.cat_id">{{item.cat_name}}</option>
+		</select>				
+	</div>
+	<div class="mt45 text-center ml20">
+		<button class="ml30 button or" @click="ComitCatinfo()">提交</button>
+		<button class="button or" @click="HideDiv()">取消</button>
+	</div>
 </div>
 
 
@@ -55,9 +58,6 @@
 	<button @click="ComitCkInfo()">提交</button>
 	<button @click="ComintCk(2)">取消</button>
 </div>
-
-
-
 
 </div>
 
@@ -74,7 +74,6 @@
 		mounted: function() {
 			this.getlists()
 		},
-
 		methods: {
 			ComintCk: function(type) {
 				if (type == '1') {
@@ -90,6 +89,7 @@
 					skin: 'layui-layer-demo', //样式类名
 					closeBtn: 0, //不显示关闭按钮
 					anim: 2,
+					area: ['340px', '215px'],
 					shadeClose: true, //开启遮罩关闭
 					content: $('#ComintCk').html()
 				});
@@ -165,13 +165,24 @@
 			},
 			ShowAdd: function(ck_id) {
 				$('#hide_ckid').val(ck_id);
-				$('#add_show').show();
 				var sendData = {
 					url: "index.php/depot/Deprot/pc_last_cateinfo",
 					data: {}
 				};
 				var re = getFaceInfo(sendData);
 				this.add_info = re.data;
+				setTimeout(function () {
+					//自定页
+					layer.open({
+						type: 1,
+						skin: 'layui-layer-demo', //加上边框
+						area: ['400px', '240px'], //宽高
+						content: $('#add_show')
+					});
+				}, 300);								
+			},
+			doAdd: function(){
+				
 			},
 			HideDiv: function() {
 				$('#hide_ckid').val('');
@@ -181,7 +192,7 @@
 				var ck_id = $('#hide_ckid').val();
 				var cat_id = $("#change_cat option:selected").val();
 				if (ck_id == '') {
-					alert('仓库信息不正确');
+					layer.msg('仓库信息不正确');
 					return false;
 				}
 				if (cat_id == '') {
@@ -196,18 +207,15 @@
 					}
 				};
 				var re = getFaceInfo(sendData);
+				var vueObj = this;
 				if (re.status == '1') {
 					layer.msg(re.msg, {
-						time: 2000
+						time: 1500
 					}, function() {
-						window.location.reload();
+						oveObj.getlists();
 					});
 				} else {
-					layer.msg(re.msg, {
-						time: 2000
-					}, function() {
-						window.location.reload();
-					});
+					layer.msg(re.msg);
 				}
 
 			},
@@ -239,9 +247,15 @@
 
 </script>
 <style scoped>
+	.lh45{line-height: 45px;}
+	.nei_ul{border-left:1px solid #ddd;}
+	.nopadding{padding:0 !important;}
+	#add_fl{
+		widows: 200px;height:260px;margin:auto;
+	}
 	#Application_Form_head_ {
 		border-bottom: 2px solid #EAEEF1;
-		margin-left: 40px;
+		/* margin-left: 40px; */
 		padding-bottom: -110px;
 		height: 80px;
 	}
@@ -284,8 +298,8 @@
 	#Application_Form_main_ {
 		margin-top: 30px;
 		font-weight: 500;
-		margin-left: 5%;
-		margin-right: 10%;
+		/* margin-left: 5%;
+		margin-right: 10%; */
 	}
 
 	.bbb {
@@ -297,7 +311,7 @@
 	}
 
 	.bbb p {
-		width: 100px;
+		width: 150px;
 	}
 
 	table * {
@@ -316,7 +330,7 @@
 	}
 
 	.w_color {
-		background-color: white;
+		background-color: white;border-bottom: 1px solid #ddd;
 	}
 
 	td {

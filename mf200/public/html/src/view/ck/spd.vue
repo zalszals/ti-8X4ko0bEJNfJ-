@@ -162,24 +162,7 @@
 		margin-left: 5px;
 		margin-top: 5px;
 	}
-	#page_new {
-		margin-top: 40px;
-		position: relative;
-		left: 30%;
-	}
-	.pages {
-		overflow: hidden;
-	}
 
-	.pages li {
-		border-style: solid;
-		border-width: 1.8px;
-		border-color: #EAEEF1;
-		border-radius: 5px;
-		padding: 5px;
-		background-color: white;
-		float: left;
-	}
 
 </style>
 <script>

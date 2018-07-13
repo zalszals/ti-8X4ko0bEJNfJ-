@@ -72,16 +72,15 @@
 		</div>
 		<div id="page_new" class="paing">
 			<ul class="pages" v-if="pages > 1">
-				<li @click="getlists(truepage-1)">上一页</li>
+				<li @click="getlists(truepage-1)" class="wi">上一页</li>
 				<template v-for="(item,index) in 10">
 					<template v-if="Math.floor((truepage-1)/10)*10+item <= pages">					
-					<li :key="index" @click="getlists(Math.floor((truepage-1)/10)*10+item)" :class="truepage%10 == item || truepage%10 == 0 && item == 10 ? 'or' : ''" >
+					<li :key="index" @click="getlists(Math.floor((truepage-1)/10)*10+item)" :class="truepage%10 == item || truepage%10 == 0 && item == 10 ? 'or' : 'wi'" >
 					{{Math.floor((truepage-1)/10)*10+item}}
 					</li>						
 					</template>						
 				</template>
-
-				<li @click="getlists(truepage+1)">下一页</li>
+				<li @click="getlists(truepage+1)" class="wi">下一页</li>
 			</ul>
 		</div>
 	</div>

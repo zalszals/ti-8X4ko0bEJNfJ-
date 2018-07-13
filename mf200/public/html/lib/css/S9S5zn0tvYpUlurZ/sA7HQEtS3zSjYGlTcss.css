@@ -1,5 +1,5 @@
 .input {
-	border-style: solid ;
+	border-style: solid;
 	!important;
 	border-width: 1px;
 	!important;
@@ -12,13 +12,10 @@
 	margin-right: 10px;
 	!important;
 }
-
-.ppp {}
-
 .pages li {
 	padding: 5px;
 	!important;
-/*	background-color: white;*/
+	/*	background-color: white;*/
 	!important;
 	float: left;
 	!important;
@@ -99,10 +96,7 @@
 	!important;
 }
 
-.or {
-	background-color: #F4A356;
-	!important;
-}
+
 
 .color {
 	background-color: white !important;
@@ -112,6 +106,35 @@
 
 	background-color: #F9F9F9 !important;
 }
-.ovvvv{
-	display:none;!important;
+
+.ovvvv {
+	display: none;
+	!important;
+}
+
+
+
+.pages {
+	overflow: hidden !important;
+	text-align: center!important;
+}
+
+.pages li {
+	text-align: center!important;
+	margin: 5px!important;
+	border-style: solid !important;
+	border-width: 1.8px !important;
+	border-color: #EAEEF1 !important;
+	border-radius: 5px !important;
+	padding: 5px !important;
+	/*		background-color: white !important;*/
+	float: left !important;
+}
+
+.or {
+	background-color: #F4A356!important;
+}
+
+.wi {
+	background-color: white !important;
 }

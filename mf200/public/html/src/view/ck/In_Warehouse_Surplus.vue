@@ -1,13 +1,13 @@
 <template>
-<div id="Application_Form_main__">
+<div id="left-box">
     <div id="Application_Form_head_">
         <div id="Application_Form_Date_">
             <div id="w_Warehouse">
-                <h4  class="tit">盘盈入库</h4>
-                <button v-on:click="getlists(1,1)" class="button or">待审核</button>
+                <h4 class="tit">盘盈入库</h4>
+                <!-- <button v-on:click="getlists(1,1)" class="button or">待审核</button>
                 <button v-on:click="getlists(1,2)" class="button or">未通过</button>
                 <button v-on:click="getlists(1,3)" class="button or">待入库</button>
-                <button v-on:click="getlists(1,4)" class="button or">已完成</button>
+                <button v-on:click="getlists(1,4)" class="button or">已完成</button> -->
             </div>
             <div class="case">
                 <div class="calendarWarp" style="">
@@ -22,38 +22,22 @@
         </div>
     </div>
     <div id="Application_Form_main_">
-      <table  align="center">
+      <table align="center wb100">
 		  <tr>
-			<th>申请人</th>
-		 
-			<th>出库日期</th>
+			<th>申请人</th>		 
+			<th>入库日期</th>
 			<th>类别</th>
 			<th>名称</th>
 			<th>规格</th>
-			<th>出库数量</th>
-			<th>操作</th>
-
+			<th>出库数量</th>	
 		  </tr>
 		  <tr v-for="item in lists" class="color">
-			<td>{{item.apply_worker}}</td>
-		 
+			<td>{{item.apply_worker}}</td>		 
 			<td>{{item.add_time}}</td>
 			<td>{{item.cat_id}}</td>
 			<td>{{item.cat_child_name}}</td>
 			<td>{{item.materiel_desc}}</td>
-			<td>{{item.num}}</td>
-			<template v-if="item.status=='0'">
-			<template v-if="shen_worker=='2'">
-			<td class="changeButton_new"><button  @click="changeInfo(item.insert_id)">审核</button></td>
-			</template>
-			</template>
-			<template v-if="item.status=='1'">
-			<template v-if="item.is_checked=='0'">
-			<template v-if="bao_worker=='2'">
-			<td  class="changeButton_old" style="display:none" ><button @click="outInfo(item.insert_id)">出库</button></td>
-			</template>
-			</template>
-			</template>
+			<td>{{item.num}}</td>			
 		  </tr>
 	</table>
  
@@ -202,7 +186,7 @@
 <style scoped>
 	#Application_Form_head_ {
 		border-bottom: 2px solid #EAEEF1;
-		margin-left: 40px;
+		/* margin-left: 40px; */
 		padding-bottom: -110px;
 		height: 80px;
 	}
@@ -289,4 +273,3 @@
 		margin-left: 40%;
 	}
 </style>
-

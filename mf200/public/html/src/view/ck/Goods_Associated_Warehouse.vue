@@ -17,7 +17,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>1
+                        <td>
                             <p>关联仓库</p>
                         </td>
                         <select class="vuesela" name="addck_id">
